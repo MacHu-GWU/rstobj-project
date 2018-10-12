@@ -1,4 +1,3 @@
-
 .. image:: https://readthedocs.org/projects/rstobj/badge/?version=latest
     :target: https://rstobj.readthedocs.io/?badge=latest
     :alt: Documentation Status
@@ -56,7 +55,34 @@ Welcome to ``rstobj`` Documentation
 
 Example:
 
+.. code-block:: python
 
+    import rstobj
+
+    ltable = rstobj.directives.ListTable(
+        data=[["id", "name"], [1, "Alice"], [2, "Bob"]],
+        title="Users",
+        header=True,
+    )
+    rst = ltable.render()
+    print(rst)
+
+Output::
+
+    .. list-table:: Users
+        :header-rows: 1
+        :stub-columns: 0
+
+        * - id
+          - name
+        * - 1
+          - Alice
+        * - 2
+          - Bob
+
+I recommend to use this in your jinja2 template, ``outut.rst``::
+
+    {{ ltable.render() }}
 
 
 .. _install:
