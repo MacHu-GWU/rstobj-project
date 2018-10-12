@@ -54,6 +54,10 @@ Welcome to ``rstobj`` Documentation
 
 ``rstobj`` is a library that construct Restructured Text markup or directives from Python Code. ``rstobj`` is based on ``jinja2``.
 
+Example:
+
+
+
 
 .. _install:
 

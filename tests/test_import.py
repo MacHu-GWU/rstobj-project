@@ -7,7 +7,12 @@ from pytest import raises, approx
 
 def test():
     import rstobj
-    pass
+    rstobj.markup.URI
+    rstobj.markup.URL
+    rstobj.markup.Header
+    rstobj.markup.Header7
+    rstobj.directives.Image
+    rstobj.directives.ListTable
 
 
 if __name__ == "__main__":
