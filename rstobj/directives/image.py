@@ -1,11 +1,18 @@
 # -*- coding: utf-8 -*-
 
+"""
+image related directives.
+"""
+
 import attr
 from .base import Directive
 
 
 @attr.s
 class Image(Directive):
+    """
+    ``.. image::`` directive.
+    """
     uri = attr.ib(default=None)
     height = attr.ib(
         default=None,

@@ -15,7 +15,7 @@ def get_rst(filename):
 def edit_rst(rst):
     return "\n".join([
         line.rstrip()
-        for line in rst.split("/")
+        for line in rst.split("\n")
     ]).strip()
 
 

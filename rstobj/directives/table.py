@@ -1,11 +1,29 @@
 # -*- coding: utf-8 -*-
 
+"""
+table related directives.
+"""
+
 import attr
 from .base import Directive
 
 
 @attr.s
 class ListTable(Directive):
+    """
+    Example::
+
+        .. list-table:: Title of the table
+            :widths: 10 10 10
+            :header-rows: 1
+
+            * - Header1
+              - Header2
+              - Header3
+            * - Value1
+              - Value2
+              - Value3
+    """
     data = attr.ib(default=None)
     title = attr.ib(default="")
     index = attr.ib(default=False)

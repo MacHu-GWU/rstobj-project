@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 import pytest
-from rstobj.markup.hyperlink import URI
+from rstobj.markup.hyperlink import URI, Reference
 
 
 class TestURI(object):
@@ -10,6 +10,13 @@ class TestURI(object):
         obj = URI(title="Python Homepage", link="https://www.python.org")
         rst = obj.render()
         assert rst == "`Python Homepage <https://www.python.org>`_"
+
+
+class TestReference(object):
+    def test(self):
+        obj = Reference(title="Section1", label="section1")
+        rst = obj.render()
+        assert rst == ":ref:`Section1 <section1>`"
 
 
 if __name__ == "__main__":

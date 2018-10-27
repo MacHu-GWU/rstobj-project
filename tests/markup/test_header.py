@@ -19,7 +19,8 @@ class TestHeader(object):
             rst, "rstobj.markup.header.Header.no-ref_key-auto-bar.rst")
 
     def test_has_ref_key_auto_bar(self):
-        header = Header(title="Section 1", header_level=1, ref_key="section_1")
+        header = Header(title="Section 1", header_level=1,
+                        ref_label="section_1")
         rst = header.render()
         compare_with(
             rst, "rstobj.markup.header.Header.has-ref_key-auto-bar.rst")
@@ -31,7 +32,7 @@ class TestHeader(object):
 
 class TestHeader2(object):
     def test_has_ref_key_auto_bar(self):
-        header = Header2(title="Section 1.1", ref_key="section_1_1")
+        header = Header2(title="Section 1.1", ref_label="section_1_1")
         rst = header.render()
         compare_with(
             rst, "rstobj.markup.header.Header2.has-ref_key-auto-bar.rst")

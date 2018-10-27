@@ -6,3 +6,4 @@ reStructuredText Directives: http://docutils.sourceforge.net/docs/ref/rst/direct
 
 from .image import Image
 from .table import ListTable
+from .codeblock import *

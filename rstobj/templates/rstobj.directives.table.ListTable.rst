@@ -16,9 +16,9 @@
 {% for row in obj.data %}
     {%- for item in row %}
     {%- if loop.index0 == 0 %}
-    * - {{ item }}
+    * - {{ obj.str_or_render(item, indent=2, first_line_indent=0) }}
     {%- else %}
-      - {{ item }}
+      - {{ obj.str_or_render(item, indent=2, first_line_indent=0) }}
     {%- endif %}
     {%- endfor %}
 {%- endfor %}

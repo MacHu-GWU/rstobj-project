@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+import six
 import attr
 from attrs_mate import AttrsClass
 from .templates import env
@@ -28,11 +29,24 @@ class RstObj(AttrsClass):
     def template(self):
         return env.get_template(self.template_name)
 
-    def render(self, indent=None, **kwargs):
+    def render(self, indent=None, first_line_indent=None, **kwargs):
         out = self.template.render(obj=self)
         if indent:
-            out = "\n".join([
-                Options.tab * indent + line
-                for line in out.split("\n")
-            ])
+            origin_lines = out.split("\n")
+            target_lines = [Options.tab * indent + line.rstrip()
+                            for line in origin_lines]
+            if first_line_indent is not None:
+                if first_line_indent >= 0:
+                    target_lines[0] = Options.tab * \
+                        first_line_indent + origin_lines[0].rstrip()
+                else:  # pragma: no cover
+                    raise TypeError
+            out = "\n".join(target_lines)
         return out
+
+    @staticmethod
+    def str_or_render(value, **kwargs):
+        if isinstance(value, RstObj):
+            return value.render(**kwargs)
+        else:
+            return six.text_type(value)

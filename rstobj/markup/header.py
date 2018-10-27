@@ -1,5 +1,9 @@
 # -*- coding: utf-8 -*-
 
+"""
+header markups
+"""
+
 import attr
 from ..base import RstObj
 
@@ -18,7 +22,7 @@ HEADER_CHAR_MAPPER = {
 class Header(RstObj):
     title = attr.ib()
     header_level = attr.ib(default=None)
-    ref_key = attr.ib(default=None)
+    ref_label = attr.ib(default=None)
 
     _header_level = 0
     _bar_length = None
@@ -51,34 +55,76 @@ class HeaderLevel(Header):
 
 @attr.s
 class Header1(HeaderLevel):
+    """
+    Example::
+
+        Header1
+        {}
+    """.format(HEADER_CHAR_MAPPER[1] * 7)
     _header_level = 1
 
 
 @attr.s
 class Header2(HeaderLevel):
+    """
+    Example::
+
+        Header2
+        {}
+    """.format(HEADER_CHAR_MAPPER[2] * 7)
     _header_level = 2
 
 
 @attr.s
 class Header3(HeaderLevel):
+    """
+    Example::
+
+        Header3
+        {}
+    """.format(HEADER_CHAR_MAPPER[3] * 7)
     _header_level = 3
 
 
 @attr.s
 class Header4(HeaderLevel):
+    """
+    Example::
+
+        Header4
+        {}
+    """.format(HEADER_CHAR_MAPPER[4] * 7)
     _header_level = 4
 
 
 @attr.s
 class Header5(HeaderLevel):
+    """
+    Example::
+
+        Header5
+        {}
+    """.format(HEADER_CHAR_MAPPER[5] * 7)
     _header_level = 5
 
 
 @attr.s
 class Header6(HeaderLevel):
+    """
+    Example::
+
+        Header6
+        {}
+    """.format(HEADER_CHAR_MAPPER[6] * 7)
     _header_level = 6
 
 
 @attr.s
 class Header7(HeaderLevel):
+    """
+    Example::
+
+        Header7
+        {}
+    """.format(HEADER_CHAR_MAPPER[7] * 7)
     _header_level = 7
