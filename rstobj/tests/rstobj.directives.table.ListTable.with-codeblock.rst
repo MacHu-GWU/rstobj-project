@@ -6,9 +6,13 @@
       - example
     * - python2
       - .. code-block::
-        
-            print 'Hello World!'
+
+            from __future__ import print_function
+
+            print('Hello World!')
     * - python3
       - .. code-block::
-        
+
+            from __future__ import print_function
+
             print('Hello World!')

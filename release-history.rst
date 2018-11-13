@@ -2,7 +2,7 @@ Release and Version History
 ==============================================================================
 
 
-0.0.3 (TODO)
+0.0.4 (TODO)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 **Features and Improvements**
 
@@ -13,11 +13,22 @@ Release and Version History
 **Miscellaneous**
 
 
+0.0.3 (2018-11-13)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+**Features and Improvements**
+
+- add support for ``.. contents::`` directive.
+
+**Bugfixes**
+
+- fix codeblock lang error
+
+
 0.0.2 (2018-10-28)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 **Features and Improvements**
 
-- add support ``.. code-block::`` directive.
+- add support for ``.. code-block::`` directive.
 - allow ``.. code-block::`` in ``ListTable``.
 - support cross reference ``:ref``
 

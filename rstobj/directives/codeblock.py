@@ -115,7 +115,7 @@ class CodeBlockC(CodeBlockBase):
 
 @attr.s
 class CodeBlockCPP(CodeBlockBase):
-    meta_lang = CodeBlockBase.LangOptions.python
+    meta_lang = CodeBlockBase.LangOptions.cpp
     __doc__ = code_block_doc_string.format(meta_lang)
 
 
@@ -157,5 +157,5 @@ class CodeBlockMake(CodeBlockBase):
 
 @attr.s
 class CodeBlockBash(CodeBlockBase):
-    meta_lang = CodeBlockBase.LangOptions.css
+    meta_lang = CodeBlockBase.LangOptions.bash
     __doc__ = code_block_doc_string.format(meta_lang)

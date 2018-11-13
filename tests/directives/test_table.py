@@ -2,7 +2,6 @@
 # -*- coding: utf-8 -*-
 
 import pytest
-from pytest import raises, approx
 from rstobj.tests import compare_with
 from rstobj.directives.table import ListTable
 from rstobj.directives.codeblock import Code, CodeBlock
@@ -32,8 +31,10 @@ class TestListTable(object):
         ltable = ListTable(
             data=[
                 ["lang", "example"],
-                ["python2", CodeBlock(code=Code("print 'Hello World!'"))],
-                ["python3", CodeBlock(code=Code("print('Hello World!')"))]
+                ["python2", CodeBlock(
+                    code=Code("from __future__ import print_function\n\nprint('Hello World!')"))],
+                ["python3", CodeBlock(
+                    code=Code("from __future__ import print_function\n\nprint('Hello World!')"))]
             ],
             title="Hello World Examples",
             index=False,
