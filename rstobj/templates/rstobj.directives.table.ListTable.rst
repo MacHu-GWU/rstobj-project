@@ -10,7 +10,7 @@
 {%- else %}
     :stub-columns: 0
 {%- endif %}
-{%- if obj.align is not none%}
+{%- if obj.align is not none %}
     :align: {{ obj.align }}
 {%- endif %}
 {% for row in obj.data %}

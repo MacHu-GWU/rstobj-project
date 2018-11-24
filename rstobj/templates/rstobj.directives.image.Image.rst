@@ -9,7 +9,7 @@
 {%- if obj.alt_text is not none %}
     :alt: {{ obj.alt_text}}
 {%- endif %}
-{%- if obj.height is not none %}
+{%- if obj.align is not none %}
     :align: {{ obj.align}}
 {%- endif %}
 {% endblock %}

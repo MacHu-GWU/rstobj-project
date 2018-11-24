@@ -5,7 +5,7 @@
 Construct RestructuredText markup and directives from Python Code.
 """
 
-__version__ = "0.0.3"
+__version__ = "0.0.4"
 __short_description__ = "Construct RestructuredText markup and directives from Python Code."
 __license__ = "MIT"
 __author__ = "Sanhe Hu"
