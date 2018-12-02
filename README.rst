@@ -80,9 +80,34 @@ Output::
         * - 2
           - Bob
 
-I recommend to use this in your jinja2 template, ``outut.rst``::
+I recommend to use this in your jinja2 template, content of ``outut.rst``::
 
     {{ ltable.render() }}
+
+And use ``rstobj`` with ``sphinx-jinja`` library https://pypi.org/project/sphinx-jinja/ in sphinx doc project.
+
+**Supported directives**:
+
+- ``.. image::``
+- ``.. list-table::``
+- ``.. contents::``
+- ``.. code-block::``
+- ``.. include::``
+
+**Supported markup**:
+
+- ``Header``::
+
+    .. _ref-label:
+
+    Title
+    =====
+
+- ``URL``: ```Text <Target>`_``
+- ``Reference``: ``:ref:`Text <Target>```
+
+
+**If you need more features, please submit an issue to https://github.com/MacHu-GWU/rstobj-project/issues**
 
 
 .. _install:

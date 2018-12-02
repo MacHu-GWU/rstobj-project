@@ -13,6 +13,6 @@ sub packages and modules
     directives <directives/__init__>
     markup <markup/__init__>
     templates <templates/__init__>
-    base <base>
     option <option>
+    base <base>
     

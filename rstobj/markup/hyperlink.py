@@ -19,11 +19,6 @@ URL = URI
 
 
 @attr.s
-class RefLabel(RstObj):
-    label = attr.ib()
-
-
-@attr.s
 class Reference(RstObj):
     """
     Example::

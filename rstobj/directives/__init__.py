@@ -8,3 +8,4 @@ from .image import Image
 from .table import ListTable
 from .codeblock import *
 from .toc import TableOfContent
+from .miscellaneous import Include

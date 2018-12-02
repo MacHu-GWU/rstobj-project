@@ -10,8 +10,10 @@ sub packages and modules
 .. toctree::
     :maxdepth: 1
 
-    base <base>
+    toc <toc>
+    miscellaneous <miscellaneous>
     codeblock <codeblock>
-    image <image>
     table <table>
+    image <image>
+    base <base>
     

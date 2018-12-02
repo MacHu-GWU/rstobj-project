@@ -37,6 +37,11 @@ class TestHeader2(object):
         compare_with(
             rst, "rstobj.markup.header.Header2.has-ref_key-auto-bar.rst")
 
+    def test_auto_label(self):
+        header = Header2(title="Section 2", auto_label=True)
+        rst = header.render()
+        compare_with(rst, "rstobj.markup.header.Header2.auto-ref_key.rst")
+
 
 if __name__ == "__main__":
     import os

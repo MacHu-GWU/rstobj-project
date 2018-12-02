@@ -2,7 +2,7 @@ Release and Version History
 ==============================================================================
 
 
-0.0.5 (TODO)
+0.0.6 (TODO)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 **Features and Improvements**
 
@@ -11,6 +11,14 @@ Release and Version History
 **Bugfixes**
 
 **Miscellaneous**
+
+
+0.0.5 (TODO)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+**Features and Improvements**
+
+- add ``.. include:: filepath`` directive
+- add ``auto_label`` arg for ``Header`` markup.
 
 
 0.0.4 (2018-11-23)

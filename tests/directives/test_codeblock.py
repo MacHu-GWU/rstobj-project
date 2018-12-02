@@ -44,7 +44,7 @@ class TestCodeBlock(object):
 
 class TestCodeBlockPython(object):
     def test_render(self):
-        cb = CodeBlockPython(code=Code(cb_user_class))
+        cb = CodeBlockPython.from_string(cb_user_class)
         rst = cb.render()
         compare_with(
             rst, "rstobj.directives.codeblock.CodeBlockPython.render.rst")

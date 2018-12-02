@@ -7,6 +7,20 @@ header markups
 import attr
 from ..base import RstObj
 
+dash_char_list = " _~"
+ignore_char_list = """`*()[]{}<>"'"""
+
+
+def to_label(title):
+    for char in dash_char_list:
+        title = title.replace(char, "-")
+    for char in ignore_char_list:
+        title = title.replace(char, "")
+    return "-".join([
+        chunk.strip() for chunk in title.split("-") if chunk.strip()
+    ])
+
+
 HEADER_CHAR_MAPPER = {
     1: "=",
     2: "-",
@@ -23,11 +37,17 @@ class Header(RstObj):
     title = attr.ib()
     header_level = attr.ib(default=None)
     ref_label = attr.ib(default=None)
+    auto_label = attr.ib(default=False)
 
     _header_level = 0
     _bar_length = None
 
     meta_not_none_fields = ("header_level",)
+
+    def __attrs_post_init__(self):
+        super(Header, self).__attrs_post_init__()
+        if self.auto_label and (self.ref_label is None):
+            self.ref_label = to_label(self.title)
 
     @property
     def header_char(self):

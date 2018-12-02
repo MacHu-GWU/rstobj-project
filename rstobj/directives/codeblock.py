@@ -65,6 +65,13 @@ class CodeBlockBase(CodeBlockEmpty):
     def template_name(self):
         return "{}.{}.rst".format(self.__module__, "CodeBlockBase")
 
+    @classmethod
+    def from_string(cls, value):
+        """
+        Construct CodeBlock from string.
+        """
+        return cls(code=Code(text=value))
+
 
 code_block_doc_string = """
 :param code: :class:`Code`.
