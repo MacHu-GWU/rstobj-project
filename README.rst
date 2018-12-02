@@ -107,7 +107,7 @@ And use ``rstobj`` with ``sphinx-jinja`` library https://pypi.org/project/sphinx
 - ``Reference``: ``:ref:`Text <Target>```
 
 
-**If you need more features, please submit an issue to https://github.com/MacHu-GWU/rstobj-project/issues**
+**If you need more features, please submit an issue to** https://github.com/MacHu-GWU/rstobj-project/issues
 
 
 .. _install:
