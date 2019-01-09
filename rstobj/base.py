@@ -1,5 +1,9 @@
 # -*- coding: utf-8 -*-
 
+"""
+RestructuredText Object abstraction.
+"""
+
 import six
 import attr
 from attrs_mate import AttrsClass
@@ -9,6 +13,9 @@ from .option import Options
 
 @attr.s
 class RstObj(AttrsClass):
+    """
+    The base restructured text object.
+    """
     meta_not_none_fields = tuple()
 
     def validate_not_none_fields(self):
@@ -23,13 +30,29 @@ class RstObj(AttrsClass):
 
     @property
     def template_name(self):
+        """
+        Find template file.
+        """
         return "{}.{}.rst".format(self.__module__, self.__class__.__name__)
 
     @property
     def template(self):
+        """
+        Return ``jinja2.Template`` instance.
+        """
         return env.get_template(self.template_name)
 
     def render(self, indent=None, first_line_indent=None, **kwargs):
+        """
+        Render this object into text.
+
+        :param indent: int, global indent. Indent length can be changed in
+            :attr:`rstobj.option.Options.tab`.
+        :param first_line_indent: int, sometimes we only need to indent
+            first line, this option will overwrite the ``indent`` argument.
+        :param kwargs: other optional arguments.
+        :return: str.
+        """
         out = self.template.render(obj=self)
         if indent:
             origin_lines = out.split("\n")

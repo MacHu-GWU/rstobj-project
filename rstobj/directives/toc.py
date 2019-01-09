@@ -12,6 +12,24 @@ from .base import Directive
 class TableOfContent(Directive):
     """
     ``.. contents::`` directive.
+
+    parameter definition see here: http://docutils.sourceforge.net/docs/ref/rst/directives.html#table-of-contents
+
+    :param title: str, required.
+    :param depth: int, optional.
+    :param local: bool, optional.
+    :param backlinks: str, optional. one of
+        :attr:`TableOfContent.BacklinksOptions`.
+
+    Example::
+
+        toc = TableOfContent(title="Table of Contents", depth=2)
+        toc.render()
+
+    Output::
+
+        .. contents:: Table of Contents
+            :depth: 2
     """
     title = attr.ib(default=None)
     depth = attr.ib(
@@ -31,6 +49,13 @@ class TableOfContent(Directive):
     meta_not_none_fields = tuple()
 
     class BacklinksOptions(object):
+        """
+        ``backlinks`` argument choices.
+
+        - ``TableOfContent.BacklinksOptions.entry``: ``"entry"``
+        - ``TableOfContent.BacklinksOptions.top``: ``"top"``
+        - ``TableOfContent.BacklinksOptions.none``: ``"none"``
+        """
         entry = "entry"
         top = "top"
         none = "none"

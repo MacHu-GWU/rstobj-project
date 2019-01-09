@@ -1,4 +1,3 @@
-#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
 import pytest
@@ -28,6 +27,13 @@ class TestHeader(object):
     def test_raise_not_none_error(self):
         with pytest.raises(ValueError):
             Header(title="Section ")
+
+    def test_raise_value_error(self):
+        with pytest.raises(ValueError):
+            Header(title="Section", header_level=0)
+
+        with pytest.raises(ValueError):
+            Header(title="Section", header_level=8)
 
 
 class TestHeader2(object):

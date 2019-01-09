@@ -12,6 +12,34 @@ from .base import Directive
 class Image(Directive):
     """
     ``.. image::`` directive.
+
+    parameter definition see here: http://docutils.sourceforge.net/docs/ref/rst/directives.html#image
+
+    :param uri: str, required.
+    :param height: int, optional.
+    :param width: int, optional.
+    :param scale: int, optional.
+    :param alt_text: str, optional.
+    :param align: str, optional. one of :class:`Image.AlignOptions`.
+
+    Example::
+
+        img = Image(
+            uri="https://www.python.org/static/img/python-logo.png",
+            height=320,
+            width=320,
+            alt_text="Image Not Found",
+            align=Image.AlignOptions.center,
+        )
+        img.render()
+
+    Output::
+
+        .. image:: https://www.python.org/static/img/python-logo.png
+            :height: 320px
+            :width: 320px
+            :alt: Image Not Found
+            :align: center
     """
     uri = attr.ib(default=None)
     height = attr.ib(
@@ -33,6 +61,16 @@ class Image(Directive):
     meta_not_none_fields = ("uri",)
 
     class AlignOptions(object):
+        """
+        ``align`` argument choices.
+
+        - ``Image.AlignOptions.left``: ``"left"``
+        - ``Image.AlignOptions.center``: ``"center"``
+        - ``Image.AlignOptions.right``: ``"right"``
+        - ``Image.AlignOptions.top``: ``"top"``
+        - ``Image.AlignOptions.middle``: ``"middle"``
+        - ``Image.AlignOptions.bottom``: ``"bottom"``
+        """
         left = "left"
         center = "center"
         right = "right"

@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 """
-
+Other directives.
 """
 
 import attr
@@ -11,7 +11,18 @@ from .base import Directive
 @attr.s
 class Include(Directive):
     """
-    ``.. include::`` directive.
+    ``.. include::`` directive. Include an external document fragment.
+
+    Example::
+
+        inc = Include(path="README.rst")
+        inc.render()
+
+    Output::
+
+        .. include:: README.rst
+
+    Parameters definition see here http://docutils.sourceforge.net/docs/ref/rst/directives.html#including-an-external-document-fragment.
     """
     path = attr.ib(default=None)
     start_line = attr.ib(default=None)

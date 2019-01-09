@@ -2,7 +2,7 @@ Release and Version History
 ==============================================================================
 
 
-0.0.6 (TODO)
+0.0.7 (TODO)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 **Features and Improvements**
 
@@ -13,7 +13,18 @@ Release and Version History
 **Miscellaneous**
 
 
-0.0.5 (TODO)
+0.0.6 (2019-01-09)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+**Features and Improvements**
+
+add bullet list and enumerate list.
+
+**Minor Improvements**
+
+add usage example for all markup and directive.
+
+
+0.0.5 (2018-12-02)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 **Features and Improvements**
 

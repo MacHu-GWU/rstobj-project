@@ -9,7 +9,12 @@ class URI(RstObj):
     """
     Example::
 
-        `title <link>`_
+        uri = URI(title="Hello World", link="https://www.google.com")
+        uri.render()
+
+    Output::
+
+        `Hello World <https://www.google.com>`_
     """
     title = attr.ib()
     link = attr.ib()
@@ -23,7 +28,12 @@ class Reference(RstObj):
     """
     Example::
 
-        :ref:`title <label`
+        ref = Reference(title="Hello World", label="hello-world")
+        ref.render()
+
+    Output::
+
+        :ref:`Hello World <hello-world>`
     """
     title = attr.ib()
     label = attr.ib()

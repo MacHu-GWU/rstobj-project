@@ -24,6 +24,12 @@ class CodeBlockEmpty(Directive):
     """
     Example::
 
+        code = "your code ..."
+        cb = CodeBlockEmpty.from_string(code)
+        cb.render()
+
+    Output::
+
         ::
 
             your code ...
@@ -35,9 +41,19 @@ class CodeBlockEmpty(Directive):
 
     meta_not_none_fields = ("code",)
 
+    @classmethod
+    def from_string(cls, text):
+        """
+        Construct CodeBlock from string.
+        """
+        return cls(code=Code(text=text))
+
 
 @attr.s
 class CodeBlockBase(CodeBlockEmpty):
+    """
+    Base class for language specified code block.
+    """
     code = attr.ib(
         default=None,
         validator=attr.validators.instance_of(Code)
@@ -65,20 +81,19 @@ class CodeBlockBase(CodeBlockEmpty):
     def template_name(self):
         return "{}.{}.rst".format(self.__module__, "CodeBlockBase")
 
-    @classmethod
-    def from_string(cls, value):
-        """
-        Construct CodeBlock from string.
-        """
-        return cls(code=Code(text=value))
-
 
 code_block_doc_string = """
 :param code: :class:`Code`.
 
-Example:: {}
+Example::
 
-    .. code-block: python
+    code = "your code ..."
+    cb = CodeBlockLanguageName.from_string(code)
+    cb.render()
+
+Output::
+
+    .. code-block: {}
 
         your code ...
 """.strip()

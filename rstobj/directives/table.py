@@ -11,7 +11,26 @@ from .base import Directive
 @attr.s
 class ListTable(Directive):
     """
+    List Tabulate Table.
+
+    parameter definition see here http://docutils.sourceforge.net/docs/ref/rst/directives.html#list-table.
+
+    :param data: list of list.
+    :param title: str, optional.
+    :param index: bool, use first column as index. default False.
+    :param header: bool, use first row as header. default True.
+    :param align:
+
     Example::
+
+        ltable = rstobj.directives.ListTable(
+            data=[["id", "name"], [1, "Alice"], [2, "Bob"]],
+            title="Users",
+            header=True,
+        )
+        ltable.render()
+
+    Output::
 
         .. list-table:: Title of the table
             :widths: 10 10 10
@@ -34,6 +53,9 @@ class ListTable(Directive):
     meta_not_none_fields = ("data",)
 
     class AlignOptions(object):
+        """
+        ``align`` parameter choices.
+        """
         left = "left"
         center = "center"
         right = "right"
