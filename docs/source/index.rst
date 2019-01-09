@@ -1,6 +1,6 @@
 .. contents::
 
-Release v\ |release| (:ref:`What's new? <release_history>`).
+Release v\ |release| (:ref:`What's new? <release-history>`).
 
 .. include:: ../../README.rst
 

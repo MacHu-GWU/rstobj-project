@@ -56,7 +56,20 @@ Welcome to ``rstobj`` Documentation
 
 ``rstobj`` is a library that construct Restructured Text markup or directives from Python Code. ``rstobj`` is based on ``jinja2``.
 
-Example:
+**The idea behind rstobj**:
+
+RestructuredText is super powerful, way more powerful than markdown. But have you ever think of **customize YOUR OWN markup or directive and do some magic?**
+
+`Sphinx Doc <http://www.sphinx-doc.org/en/master/>`_ is the ultimate doc build tool. With ``rstobj``, you can **easily create your own markup / directive, and hide complex workflow behind a single markup / directive**, then use it when you need it. Here's some ideas:
+
+1. Use ``.. include-all-image::`` to automatically scan image file under a directory, create ``.. image::`` directive and organize everything in a table.
+2. Separate comment and value of the config file, automatically create an document for a config file.
+3. ...
+
+I have a `Blog Post <https://github.com/MacHu-GWU/Tech-Blog/issues/6>`_ to share how to create a sphinx doc extension in 50 lines and customize your own directive (Sorry, its written in Chinese).
+
+
+**Example**:
 
 .. code-block:: python
 
