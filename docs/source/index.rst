@@ -20,7 +20,7 @@ This simple markup ``.. icontable:: demo-images`` creates
 
 It finds all image file in `demo-images <https://github.com/MacHu-GWU/rstobj-project/tree/master/docs/source/demo-images>`_ directory, and put them in a 3-columns list table. Automatically resize them to 64 x 64 px.
 
-The `core source code <https://github.com/MacHu-GWU/rstobj-project/blob/master/rstobj/base.py>`_ is only like **50 lines**.
+The `core source code <https://github.com/MacHu-GWU/rstobj-project/blob/master/rstobj/demo.py>`_ is only like **50 lines**.
 
 
 .. include:: ../../AUTHORS.rst
