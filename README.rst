@@ -17,7 +17,7 @@
 .. image:: https://img.shields.io/pypi/pyversions/rstobj.svg
     :target: https://pypi.python.org/pypi/rstobj
 
-.. image:: https://img.shields.io/pypi/dm/:rstobj.svg
+.. image:: https://img.shields.io/pypi/dm/rstobj.svg
     :target: https://pypi.python.org/pypi/rstobj
 
 .. image:: https://img.shields.io/badge/STAR_Me_on_GitHub!--None.svg?style=social
