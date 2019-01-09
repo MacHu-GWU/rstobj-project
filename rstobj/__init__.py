@@ -16,5 +16,7 @@ __github_username__ = "MacHu-GWU"
 
 try:
     from . import directives, markup
+    from .directives import *
+    from .markup import *
 except:  # pragma: no cover
     pass

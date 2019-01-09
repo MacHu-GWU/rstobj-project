@@ -11,8 +11,13 @@ def test():
     rstobj.markup.URL
     rstobj.markup.Header
     rstobj.markup.Header7
+    rstobj.markup.BulletList
+    rstobj.markup.EnumList
     rstobj.directives.Image
     rstobj.directives.ListTable
+    rstobj.directives.CodeBlock
+    rstobj.directives.CodeBlockEmpty
+    rstobj.directives.CodeBlockPython
 
 
 if __name__ == "__main__":

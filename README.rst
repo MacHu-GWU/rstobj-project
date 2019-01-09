@@ -60,7 +60,11 @@ Example:
 
 .. code-block:: python
 
-    import rstobj
+    import rstobj # or from rstobj import *
+
+    header = rstobj.markup.Header(title="Section1", header_level=1, auto_label=True)
+    rst_header = header.render()
+    print(rst_header)
 
     ltable = rstobj.directives.ListTable(
         data=[["id", "name"], [1, "Alice"], [2, "Bob"]],
@@ -68,9 +72,14 @@ Example:
         header=True,
     )
     rst = ltable.render()
-    print(rst)
+    print(rst_ltable)
 
 Output::
+
+    .. _section1:
+
+    Section1
+    ========
 
     .. list-table:: Users
         :header-rows: 1
@@ -85,6 +94,7 @@ Output::
 
 I recommend to use this in your jinja2 template, content of ``outut.rst``::
 
+    {{ header.render() }}
     {{ ltable.render() }}
 
 And use ``rstobj`` with ``sphinx-jinja`` library https://pypi.org/project/sphinx-jinja/ in sphinx doc project.
