@@ -14,5 +14,6 @@ sub packages and modules
     markup <markup/__init__>
     templates <templates/__init__>
     option <option>
+    demo <demo>
     base <base>
     

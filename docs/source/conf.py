@@ -46,6 +46,7 @@ extensions = [
     'sphinxcontrib.jinja',
     'sphinx_copybutton',
     'docfly.directives',
+    'rstobj.demo',
 ]
 
 # Add any paths that contain templates here, relative to this directory.
