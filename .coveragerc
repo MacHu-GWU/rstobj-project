@@ -3,7 +3,7 @@
 [run]
 omit =
     rstobj/pkg/*
-    rstobj/zzz_ezinstall.py
+    rstobj/demo.py
 
 [report]
 # Regexes for lines to exclude from consideration
