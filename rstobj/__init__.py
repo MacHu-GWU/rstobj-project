@@ -1,11 +1,11 @@
-#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
 """
 Construct RestructuredText markup and directives from Python Code.
 """
 
-__version__ = "0.0.6"
+from ._version import __version__
+
 __short_description__ = "Construct RestructuredText markup and directives from Python Code."
 __license__ = "MIT"
 __author__ = "Sanhe Hu"
