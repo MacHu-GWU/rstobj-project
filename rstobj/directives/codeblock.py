@@ -14,7 +14,7 @@ class Code(RstObj):
     """
     Pure text code Snippet.
     """
-    text = attr.ib(default=None)
+    text = attr.ib(default=None)  # type: str
 
     meta_not_none_fields = ("text",)
 
@@ -37,7 +37,7 @@ class CodeBlockEmpty(Directive):
     code = attr.ib(
         default=None,
         validator=attr.validators.instance_of(Code)
-    )
+    )  # type: Code
 
     meta_not_none_fields = ("code",)
 
@@ -45,6 +45,8 @@ class CodeBlockEmpty(Directive):
     def from_string(cls, text):
         """
         Construct CodeBlock from string.
+
+        :type text: str
         """
         return cls(code=Code(text=text))
 
@@ -54,12 +56,8 @@ class CodeBlockBase(CodeBlockEmpty):
     """
     Base class for language specified code block.
     """
-    code = attr.ib(
-        default=None,
-        validator=attr.validators.instance_of(Code)
-    )
 
-    meta_lang = ""
+    meta_lang = ""  # type: str
 
     class LangOptions(object):
         empty = ""

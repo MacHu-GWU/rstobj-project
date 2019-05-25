@@ -26,4 +26,4 @@ class BulletList(RstObj):
 
     More example: http://docutils.sourceforge.net/docs/user/rst/quickref.html#bullet-lists
     """
-    items = attr.ib()
+    items = attr.ib()   # type: list

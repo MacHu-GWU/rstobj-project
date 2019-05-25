@@ -18,7 +18,9 @@ class TableOfContent(Directive):
     :param title: str, required.
     :param depth: int, optional.
     :param local: bool, optional.
-    :param backlinks: str, optional. one of
+
+    :type backlinks: str
+    :param backlinks: optional. one of
         :attr:`TableOfContent.BacklinksOptions`.
 
     Example::
@@ -31,15 +33,15 @@ class TableOfContent(Directive):
         .. contents:: Table of Contents
             :depth: 2
     """
-    title = attr.ib(default=None)
+    title = attr.ib(default=None)   # type: str
     depth = attr.ib(
         default=None,
         validator=attr.validators.optional(attr.validators.instance_of(int)),
-    )
+    )   # type: int
     local = attr.ib(
         default=False,
         validator=attr.validators.optional(attr.validators.instance_of(bool)),
-    )
+    )   # type: bool
     backlinks = attr.ib(
         default=None,
         validator=attr.validators.optional(attr.validators.instance_of(str)),

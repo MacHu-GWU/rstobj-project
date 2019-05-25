@@ -24,6 +24,8 @@ ignore_char_list = """`*()[]{}<>"'"""
 def to_label(title):
     """
     slugify title and convert to reference label.
+
+    :rtype: str
     """
     for char in dash_char_list:
         title = title.replace(char, "-")
@@ -69,10 +71,10 @@ class Header(RstObj):
         Hello World
         ===========
     """
-    title = attr.ib()
-    header_level = attr.ib(default=None)
-    ref_label = attr.ib(default=None)
-    auto_label = attr.ib(default=False)
+    title = attr.ib()  # type: str
+    header_level = attr.ib(default=None)  # type: int
+    ref_label = attr.ib(default=None)  # type: str
+    auto_label = attr.ib(default=False)  # type: bool
 
     _header_level = 0
     _bar_length = None
@@ -92,6 +94,9 @@ class Header(RstObj):
 
     @property
     def header_char(self):
+        """
+        :rtype: str
+        """
         if self.header_level:
             return HEADER_CHAR_MAPPER[self.header_level]
         else:
@@ -99,6 +104,9 @@ class Header(RstObj):
 
     @property
     def template_name(self):
+        """
+        :rtype: str
+        """
         return "{}.{}.rst".format(self.__module__, "Header")
 
     def render(self, bar_length=None, **kwargs):

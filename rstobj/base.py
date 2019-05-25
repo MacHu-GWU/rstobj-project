@@ -32,6 +32,8 @@ class RstObj(AttrsClass):
     def template_name(self):
         """
         Find template file.
+
+        :rtype: str
         """
         return "{}.{}.rst".format(self.__module__, self.__class__.__name__)
 
@@ -39,6 +41,8 @@ class RstObj(AttrsClass):
     def template(self):
         """
         Return ``jinja2.Template`` instance.
+
+        :rtype: str
         """
         return env.get_template(self.template_name)
 
@@ -46,12 +50,17 @@ class RstObj(AttrsClass):
         """
         Render this object into text.
 
-        :param indent: int, global indent. Indent length can be changed in
+        :type indent: int
+        :param indent: global indent. Indent length can be changed in
             :attr:`rstobj.option.Options.tab`.
-        :param first_line_indent: int, sometimes we only need to indent
+
+        :type first_line_indent: int
+        :param first_line_indent: sometimes we only need to indent
             first line, this option will overwrite the ``indent`` argument.
+
         :param kwargs: other optional arguments.
-        :return: str.
+
+        :rtype: str
         """
         out = self.template.render(obj=self)
         if indent:
@@ -69,6 +78,12 @@ class RstObj(AttrsClass):
 
     @staticmethod
     def str_or_render(value, **kwargs):
+        """
+        If it is a string type, then just return. If it is a RstObj type,
+        then return the rendered string.
+
+        :rtype: str
+        """
         if isinstance(value, RstObj):
             return value.render(**kwargs)
         else:

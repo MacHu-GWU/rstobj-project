@@ -1,5 +1,21 @@
 # -*- coding: utf-8 -*-
 
+"""
+
+This module is a sphinx-doc add-on to implement the following markup::
+
+    .. icontable:: <dirname>
+        :n_columns: <n_columns>
+
+For example::
+
+    .. icontable:: demo-images
+        :n_columns: 3
+
+It looks for image file in <currend_dir>/<dirname>, and put them into a rst
+list table, <n_columns> item each row.
+"""
+
 from __future__ import unicode_literals
 import sphinx.util
 from docutils import nodes
@@ -42,7 +58,7 @@ def derive_rst(current_dir, image_dir, n_columns):
         Image(uri=str(p.relative_to(current_dir)), height=64, width=64)
         for p in image_dir.select_image()
     ]
-    data = grouper(image_list, n_columns)
+    data = list(grouper(image_list, n_columns))
     ltable = ListTable(
         data=data, header=False, index=False
     )

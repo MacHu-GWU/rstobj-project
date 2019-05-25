@@ -20,6 +20,8 @@ class Image(Directive):
     :param width: int, optional.
     :param scale: int, optional.
     :param alt_text: str, optional.
+
+    :type alian: str
     :param align: str, optional. one of :class:`Image.AlignOptions`.
 
     Example::
@@ -41,11 +43,11 @@ class Image(Directive):
             :alt: Image Not Found
             :align: center
     """
-    uri = attr.ib(default=None)
+    uri = attr.ib(default=None)  # type: str
     height = attr.ib(
         default=None,
         validator=attr.validators.optional(attr.validators.instance_of(int)),
-    )
+    )  # type: int
     width = attr.ib(
         default=None,
         validator=attr.validators.optional(attr.validators.instance_of(int)),
@@ -53,12 +55,12 @@ class Image(Directive):
     scale = attr.ib(
         default=None,
         validator=attr.validators.optional(attr.validators.instance_of(int)),
-    )
-    alt_text = attr.ib(default=None)
+    )  # type: int
+    alt_text = attr.ib(default=None)  # type: str
     align = attr.ib(default=None)
 
-    meta_directive_keyword = "image"
-    meta_not_none_fields = ("uri",)
+    meta_directive_keyword = "image"  # type: str
+    meta_not_none_fields = ("uri",)  # type: tuple
 
     class AlignOptions(object):
         """
@@ -87,4 +89,7 @@ class Image(Directive):
 
     @property
     def arg(self):
+        """
+        :rtype:
+        """
         return self.uri

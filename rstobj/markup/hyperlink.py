@@ -16,8 +16,8 @@ class URI(RstObj):
 
         `Hello World <https://www.google.com>`_
     """
-    title = attr.ib()
-    link = attr.ib()
+    title = attr.ib()  # type: str
+    link = attr.ib()  # type: str
 
 
 URL = URI
@@ -35,8 +35,8 @@ class Reference(RstObj):
 
         :ref:`Hello World <hello-world>`
     """
-    title = attr.ib()
-    label = attr.ib()
+    title = attr.ib()  # type: str
+    label = attr.ib()  # type: str
 
 
 Ref = Reference
