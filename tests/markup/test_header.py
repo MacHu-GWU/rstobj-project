@@ -6,6 +6,10 @@ from rstobj.markup.header import Header, Header2
 
 
 class TestHeader(object):
+    def test_init(self):
+        with pytest.raises(ValueError):
+            Header(title="Section 1", header_level=None)
+            
     def test_no_ref_key(self):
         header = Header(title="Section 1", header_level=1, bar_length=80)
         rst = header.render()
@@ -24,6 +28,11 @@ class TestHeader(object):
         )
         rst = header.render()
         compare_with(rst, "rstobj.markup.header.Header.has-ref_key-auto-bar.rst")
+
+    def test_bar_length_shorter_than_title(self):
+        header = Header(title="THIS IS A VERY LONG TITLE", header_level=1, bar_length=6)
+        header.render()
+        assert header.bar_length != 6
 
     def test_raise_value_error(self):
         with pytest.raises(ValueError):

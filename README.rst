@@ -58,6 +58,8 @@ Welcome to ``rstobj`` Documentation
 
 RestructuredText is super powerful, way more powerful than markdown. But have you ever think of **customize YOUR OWN markup or directive and do some magic?**
 
+Have you think of automatically generate customized document from your code or tabulate data?
+
 `Sphinx Doc <http://www.sphinx-doc.org/en/master/>`_ is the ultimate doc build tool. With ``rstobj``, you can **easily create your own markup / directive, and hide complex workflow behind a single markup / directive**, then use it when you need it. Here's some ideas:
 
 1. Use ``.. include-all-image::`` to automatically scan image file under a directory, create ``.. image::`` directive and organize everything in a table.

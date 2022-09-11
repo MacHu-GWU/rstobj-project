@@ -9,7 +9,7 @@ import typing as T
 import attr
 from attrs_mate import AttrsClass
 
-if T.TYPE_CHECKING:
+if T.TYPE_CHECKING:  # pragma: no cover
     from jinja2 import Template
 
 from .templates import env
@@ -25,7 +25,7 @@ class RstObj(AttrsClass):
 
     def validate_not_none_fields(self):
         for field in self.meta_not_none_fields:
-            if getattr(self, field) is None:
+            if getattr(self, field) is None:  # pragma: no cover
                 msg = "`{}.{}` can't be None!" \
                     .format(self.__class__.__name__, field)
                 raise ValueError(msg)
