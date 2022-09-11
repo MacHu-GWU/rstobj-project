@@ -43,14 +43,14 @@ class ListTable(Directive):
               - Value2
               - Value3
     """
-    data = attr.ib(default=None)    # type: list
-    title = attr.ib(default="")     # type: str
-    index = attr.ib(default=False)  # type: bool
-    header = attr.ib(default=True)  # type: bool
-    align = attr.ib(default=None)   # type: str
+    data: list = attr.ib(default=None)
+    title: str = attr.ib(default="")
+    index: bool = attr.ib(default=False)
+    header: bool = attr.ib(default=True)
+    align: str = attr.ib(default=None)
 
-    meta_directive_keyword = "list-table"
-    meta_not_none_fields = ("data",)
+    meta_directive_keyword: str = "list-table"
+    meta_not_none_fields: tuple = ("data",)
 
     class AlignOptions(object):
         """
@@ -68,5 +68,5 @@ class ListTable(Directive):
             )
 
     @property
-    def arg(self):
+    def arg(self) -> str:
         return self.title

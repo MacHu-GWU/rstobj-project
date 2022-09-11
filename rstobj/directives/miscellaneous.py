@@ -24,20 +24,20 @@ class Include(Directive):
 
     Parameters definition see here http://docutils.sourceforge.net/docs/ref/rst/directives.html#including-an-external-document-fragment.
     """
-    path = attr.ib(default=None)    # type: str
-    start_line = attr.ib(default=None)  # type: int
-    end_line = attr.ib(default=None)  # type: int
-    start_after = attr.ib(default=None)  # type: str
-    end_before = attr.ib(default=None)  # type: str
-    literal = attr.ib(default=None)  # type: bool
-    code = attr.ib(default=None)  # type: str
-    number_lines = attr.ib(default=None)  # type: int
-    encoding = attr.ib(default=None)  # type: str
-    tab_width = attr.ib(default=None)  # type: int
+    path: str = attr.ib(default=None)
+    start_line: int = attr.ib(default=None)
+    end_line: int = attr.ib(default=None)
+    start_after: str = attr.ib(default=None)
+    end_before: str = attr.ib(default=None)
+    literal: bool = attr.ib(default=None)
+    code: str = attr.ib(default=None)
+    number_lines: int = attr.ib(default=None)
+    encoding: str = attr.ib(default=None)
+    tab_width: int = attr.ib(default=None)
 
-    meta_directive_keyword = "include"
-    meta_not_none_fields = ("path",)
+    meta_directive_keyword: str = "include"
+    meta_not_none_fields: tuple = ("path",)
 
     @property
-    def arg(self):
+    def arg(self) -> str:
         return self.path

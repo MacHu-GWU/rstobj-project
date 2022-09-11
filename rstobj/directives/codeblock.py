@@ -14,7 +14,7 @@ class Code(RstObj):
     """
     Pure text code Snippet.
     """
-    text = attr.ib(default=None)  # type: str
+    text: str = attr.ib(default=None)
 
     meta_not_none_fields = ("text",)
 
@@ -42,11 +42,9 @@ class CodeBlockEmpty(Directive):
     meta_not_none_fields = ("code",)
 
     @classmethod
-    def from_string(cls, text):
+    def from_string(cls, text: str):
         """
         Construct CodeBlock from string.
-
-        :type text: str
         """
         return cls(code=Code(text=text))
 
@@ -57,9 +55,12 @@ class CodeBlockBase(CodeBlockEmpty):
     Base class for language specified code block.
     """
 
-    meta_lang = ""  # type: str
+    meta_lang: str = ""
 
     class LangOptions(object):
+        """
+        Full list can be found here https://pygments.org/docs/lexers/
+        """
         empty = ""
         python = "python"
         ruby = "ruby"
@@ -74,6 +75,9 @@ class CodeBlockBase(CodeBlockEmpty):
         scala = "scala"
         make = "make"
         bash = "bash"
+        lua = "lua"
+        restructuredText = "ReST"
+        markdown = "md"
 
     @property
     def template_name(self):
@@ -178,4 +182,22 @@ class CodeBlockMake(CodeBlockBase):
 @attr.s
 class CodeBlockBash(CodeBlockBase):
     meta_lang = CodeBlockBase.LangOptions.bash
+    __doc__ = code_block_doc_string.format(meta_lang)
+
+
+@attr.s
+class CodeBlockLua(CodeBlockBase):
+    meta_lang = CodeBlockBase.LangOptions.lua
+    __doc__ = code_block_doc_string.format(meta_lang)
+
+
+@attr.s
+class CodeBlockRst(CodeBlockBase):
+    meta_lang = CodeBlockBase.LangOptions.restructuredText
+    __doc__ = code_block_doc_string.format(meta_lang)
+
+
+@attr.s
+class CodeBlockMarkdown(CodeBlockBase):
+    meta_lang = CodeBlockBase.LangOptions.markdown
     __doc__ = code_block_doc_string.format(meta_lang)

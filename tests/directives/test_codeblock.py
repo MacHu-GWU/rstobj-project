@@ -26,12 +26,10 @@ class TestCodeBlockEmpty(object):
     def test_render(self):
         cb = CodeBlockEmpty(code=Code(cb_user_class))
         rst = cb.render()
-        compare_with(
-            rst, "rstobj.directives.codeblock.CodeBlockEmpty.render.rst")
+        compare_with(rst, "rstobj.directives.codeblock.CodeBlockEmpty.render.rst")
 
         rst = cb.render(indent=1)
-        compare_with(
-            rst, "rstobj.directives.codeblock.CodeBlockEmpty.render-indent.rst")
+        compare_with(rst, "rstobj.directives.codeblock.CodeBlockEmpty.render-indent.rst")
 
 
 class TestCodeBlock(object):
@@ -45,8 +43,7 @@ class TestCodeBlockPython(object):
     def test_render(self):
         cb = CodeBlockPython.from_string(cb_user_class)
         rst = cb.render()
-        compare_with(
-            rst, "rstobj.directives.codeblock.CodeBlockPython.render.rst")
+        compare_with(rst, "rstobj.directives.codeblock.CodeBlockPython.render.rst")
 
 
 if __name__ == "__main__":

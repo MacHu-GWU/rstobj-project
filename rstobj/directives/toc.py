@@ -33,22 +33,22 @@ class TableOfContent(Directive):
         .. contents:: Table of Contents
             :depth: 2
     """
-    title = attr.ib(default=None)   # type: str
-    depth = attr.ib(
+    title: str = attr.ib(default=None)
+    depth: int = attr.ib(
         default=None,
         validator=attr.validators.optional(attr.validators.instance_of(int)),
-    )   # type: int
-    local = attr.ib(
+    )
+    local: bool = attr.ib(
         default=False,
         validator=attr.validators.optional(attr.validators.instance_of(bool)),
-    )   # type: bool
-    backlinks = attr.ib(
+    )
+    backlinks: str = attr.ib(
         default=None,
         validator=attr.validators.optional(attr.validators.instance_of(str)),
     )
 
-    meta_directive_keyword = "contents"
-    meta_not_none_fields = tuple()
+    meta_directive_keyword: str = "contents"
+    meta_not_none_fields: tuple = tuple()
 
     class BacklinksOptions(object):
         """
@@ -70,7 +70,7 @@ class TableOfContent(Directive):
             )
 
     @property
-    def arg(self):
+    def arg(self) -> str:
         if self.title is None:
             return ""
         else:

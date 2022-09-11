@@ -11,18 +11,16 @@ from .base import Directive
 @attr.s
 class Image(Directive):
     """
-    ``.. image::`` directive.
+    The ``.. image::`` directive.
 
     parameter definition see here: http://docutils.sourceforge.net/docs/ref/rst/directives.html#image
 
-    :param uri: str, required.
-    :param height: int, optional.
-    :param width: int, optional.
-    :param scale: int, optional.
-    :param alt_text: str, optional.
-
-    :type alian: str
-    :param align: str, optional. one of :class:`Image.AlignOptions`.
+    :param uri: required.
+    :param height: optional.
+    :param width: optional.
+    :param scale: optional.
+    :param alt_text: optional.
+    :param align: optional. one of :class:`Image.AlignOptions`.
 
     Example::
 
@@ -43,24 +41,24 @@ class Image(Directive):
             :alt: Image Not Found
             :align: center
     """
-    uri = attr.ib(default=None)  # type: str
-    height = attr.ib(
-        default=None,
-        validator=attr.validators.optional(attr.validators.instance_of(int)),
-    )  # type: int
-    width = attr.ib(
+    uri: str = attr.ib(default=None)
+    height: int = attr.ib(
         default=None,
         validator=attr.validators.optional(attr.validators.instance_of(int)),
     )
-    scale = attr.ib(
+    width: int = attr.ib(
         default=None,
         validator=attr.validators.optional(attr.validators.instance_of(int)),
-    )  # type: int
-    alt_text = attr.ib(default=None)  # type: str
-    align = attr.ib(default=None)
+    )
+    scale: int = attr.ib(
+        default=None,
+        validator=attr.validators.optional(attr.validators.instance_of(int)),
+    )
+    alt_text: str = attr.ib(default=None)
+    align: str = attr.ib(default=None)
 
-    meta_directive_keyword = "image"  # type: str
-    meta_not_none_fields = ("uri",)  # type: tuple
+    meta_directive_keyword: str = "image"
+    meta_not_none_fields: tuple = ("uri",)
 
     class AlignOptions(object):
         """
