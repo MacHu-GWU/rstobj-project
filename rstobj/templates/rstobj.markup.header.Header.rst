@@ -2,4 +2,4 @@
 .. _{{ obj.ref_label }}:
 {% endif %}
 {{ obj.title }}
-{{ obj.header_char * obj._bar_length }}
+{{ obj.header_char * obj.bar_length }}

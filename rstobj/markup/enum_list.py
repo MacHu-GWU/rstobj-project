@@ -26,5 +26,5 @@ class EnumList(RstObj):
 
     More example: http://docutils.sourceforge.net/docs/user/rst/quickref.html#enumerated-lists
     """
-    items = attr.ib()   # type: list
-    start_num = attr.ib(default=1)  # type: int
+    items: list = attr.ib()
+    start_num: int = attr.ib(default=1)

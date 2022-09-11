@@ -21,7 +21,7 @@ dash_char_list = " _~"
 ignore_char_list = """`*()[]{}<>"'"""
 
 
-def to_label(title):
+def to_label(title: str) -> str:
     """
     slugify title and convert to reference label.
 
@@ -45,6 +45,8 @@ HEADER_CHAR_MAPPER = {
     6: "#",
     7: "^",
 }
+
+DEFAULT_HEADER_LEVEL = 1
 
 
 @attr.s
@@ -71,13 +73,11 @@ class Header(RstObj):
         Hello World
         ===========
     """
-    title = attr.ib()  # type: str
-    header_level = attr.ib(default=None)  # type: int
-    ref_label = attr.ib(default=None)  # type: str
-    auto_label = attr.ib(default=False)  # type: bool
-
-    _header_level = 0
-    _bar_length = None
+    title: str = attr.ib()
+    header_level: int = attr.ib(default=DEFAULT_HEADER_LEVEL)
+    ref_label: str = attr.ib(default=None)
+    auto_label: bool = attr.ib(default=False)
+    bar_length: int = attr.ib(default=None)
 
     meta_not_none_fields = ("header_level",)
 
@@ -89,18 +89,23 @@ class Header(RstObj):
 
     def __attrs_post_init__(self):
         super(Header, self).__attrs_post_init__()
+
         if self.auto_label and (self.ref_label is None):
             self.ref_label = to_label(self.title)
 
-    @property
-    def header_char(self):
-        """
-        :rtype: str
-        """
-        if self.header_level:
-            return HEADER_CHAR_MAPPER[self.header_level]
+        title_length = len(self.title)
+        if self.bar_length is None:
+            self.bar_length = title_length
+        elif self.bar_length < title_length:
+            self.bar_length = title_length
         else:
-            return HEADER_CHAR_MAPPER[self._header_level]
+            pass
+
+    @property
+    def header_char(self) -> str:
+        """
+        """
+        return HEADER_CHAR_MAPPER[self.header_level]
 
     @property
     def template_name(self):
@@ -109,26 +114,18 @@ class Header(RstObj):
         """
         return "{}.{}.rst".format(self.__module__, "Header")
 
-    def render(self, bar_length=None, **kwargs):
-        if bar_length is None:
-            self._bar_length = len(self.title)
-        else:
-            self._bar_length = bar_length
-        return super(Header, self).render(**kwargs)
-
 
 @attr.s
 class HeaderLevel(Header):
     meta_not_none_fields = tuple()
 
 
-header_doc_string = \
-    """
+header_doc_string = """
 Example::
 
     Header{level}
     {bar}
-"""
+""".strip()
 
 
 def _build_doc_string(header_level):
@@ -141,40 +138,47 @@ def _build_doc_string(header_level):
 @attr.s
 class Header1(HeaderLevel):
     __doc__ = _build_doc_string(1)
-    _header_level = 1
+
+    header_level: int = attr.ib(default=1)
 
 
 @attr.s
 class Header2(HeaderLevel):
     __doc__ = _build_doc_string(2)
-    _header_level = 2
+
+    header_level: int = attr.ib(default=2)
 
 
 @attr.s
 class Header3(HeaderLevel):
     __doc__ = _build_doc_string(3)
-    _header_level = 3
+
+    header_level: int = attr.ib(default=3)
 
 
 @attr.s
 class Header4(HeaderLevel):
     __doc__ = _build_doc_string(4)
-    _header_level = 4
+
+    header_level: int = attr.ib(default=4)
 
 
 @attr.s
 class Header5(HeaderLevel):
     __doc__ = _build_doc_string(5)
-    _header_level = 5
+
+    header_level: int = attr.ib(default=5)
 
 
 @attr.s
 class Header6(HeaderLevel):
     __doc__ = _build_doc_string(6)
-    _header_level = 6
+
+    header_level: int = attr.ib(default=6)
 
 
 @attr.s
 class Header7(HeaderLevel):
     __doc__ = _build_doc_string(7)
-    _header_level = 7
+
+    header_level: int = attr.ib(default=7)
