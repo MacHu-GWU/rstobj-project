@@ -2,6 +2,7 @@
 rstobj_venv/
 rstobj.egg-info/
 rstobj-*/
+tmp/
 
 
 # Byte-compiled / optimized / DLL files
@@ -70,7 +71,7 @@ instance/
 .scrapy
 
 # Sphinx documentation
-docs/_build/
+docs/build/
 
 # PyBuilder
 target/
