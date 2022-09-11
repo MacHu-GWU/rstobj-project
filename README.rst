@@ -52,7 +52,86 @@
 Welcome to ``rstobj`` Documentation
 ==============================================================================
 
-Documentation for ``rstobj``.
+``rstobj`` is a library that construct Restructured Text markup or directives from Python Code. ``rstobj`` is based on ``jinja2``.
+
+**The idea behind rstobj**:
+
+RestructuredText is super powerful, way more powerful than markdown. But have you ever think of **customize YOUR OWN markup or directive and do some magic?**
+
+`Sphinx Doc <http://www.sphinx-doc.org/en/master/>`_ is the ultimate doc build tool. With ``rstobj``, you can **easily create your own markup / directive, and hide complex workflow behind a single markup / directive**, then use it when you need it. Here's some ideas:
+
+1. Use ``.. include-all-image::`` to automatically scan image file under a directory, create ``.. image::`` directive and organize everything in a table.
+2. Separate comment and value of the config file, automatically create an document for a config file.
+3. ...
+
+I have a `Blog Post <https://github.com/MacHu-GWU/Tech-Blog/issues/6>`_ to share how to create a sphinx doc extension in 50 lines and customize your own directive (Sorry, its written in Chinese).
+
+
+**Example**:
+
+.. code-block:: python
+
+    import rstobj # or from rstobj import *
+
+    header = rstobj.markup.Header(title="Section1", header_level=1, auto_label=True)
+    rst_header = header.render()
+    print(rst_header)
+
+    ltable = rstobj.directives.ListTable(
+        data=[["id", "name"], [1, "Alice"], [2, "Bob"]],
+        title="Users",
+        header=True,
+    )
+    rst = ltable.render()
+    print(rst_ltable)
+
+Output::
+
+    .. _section1:
+
+    Section1
+    ========
+
+    .. list-table:: Users
+        :header-rows: 1
+        :stub-columns: 0
+
+        * - id
+          - name
+        * - 1
+          - Alice
+        * - 2
+          - Bob
+
+I recommend to use this in your jinja2 template, content of ``outut.rst``::
+
+    {{ header.render() }}
+    {{ ltable.render() }}
+
+And use ``rstobj`` with ``sphinx-jinja`` library https://pypi.org/project/sphinx-jinja/ in sphinx doc project.
+
+**Supported directives**:
+
+- ``.. image::``
+- ``.. list-table::``
+- ``.. contents::``
+- ``.. code-block::``
+- ``.. include::``
+
+**Supported markup**:
+
+- ``Header``::
+
+    .. _ref-label:
+
+    Title
+    =====
+
+- ``URL``: ```Text <Target>`_``
+- ``Reference``: ``:ref:`Text <Target>```
+
+
+**If you need more features, please submit an issue to** https://github.com/MacHu-GWU/rstobj-project/issues
 
 
 .. _install:
