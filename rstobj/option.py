@@ -2,4 +2,4 @@
 
 
 class Options(object):
-    tab = " " * 4
+    tab: str = " " * 4
