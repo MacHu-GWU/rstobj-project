@@ -29,23 +29,32 @@ class TestListTable(object):
     def test_with_codeblock(self):
         ltable = ListTable(
             data=[
-                ["lang", "example"],
-                ["python2", CodeBlock(
-                    code=Code("from __future__ import print_function\n\nprint('Hello World!')"))],
-                ["python3", CodeBlock(
-                    code=Code("from __future__ import print_function\n\nprint('Hello World!')"))]
+                [
+                    "lang",
+                    "example"
+                ],
+                [
+                    "python2",
+                    CodeBlock(
+                        code=Code("from __future__ import print_function\n\nprint('Hello World!')")
+                    )
+                ],
+                [
+                    "python3",
+                    CodeBlock(
+                        code=Code("from __future__ import print_function\n\nprint('Hello World!')")
+                    )
+                ]
             ],
             title="Hello World Examples",
             index=False,
             header=True
         )
         rst = ltable.render()
-        compare_with(
-            rst, "rstobj.directives.table.ListTable.with-codeblock.rst")
+        compare_with(rst, "rstobj.directives.table.ListTable.with-codeblock.rst")
 
         rst = ltable.render(indent=1)
-        compare_with(
-            rst, "rstobj.directives.table.ListTable.with-codeblock-indent.rst")
+        compare_with(rst, "rstobj.directives.table.ListTable.with-codeblock-indent.rst")
 
 
 if __name__ == "__main__":
