@@ -15,14 +15,21 @@ Release and Version History
 **Miscellaneous**
 
 
-1.1.1 (TODO)
+1.2.1 (2022-09-17)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 **Features and Improvements**
+
+- add ``widths`` option for ``ListTable``
 
 **Minor Improvements**
 
 **Bugfixes**
 
+**Miscellaneous**
+
+
+1.1.1 (2022-09-11)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 **Miscellaneous**
 
 - embrace type hint

@@ -10,6 +10,9 @@
 {%- else %}
     :stub-columns: 0
 {%- endif %}
+{%- if obj.widths is not none %}
+    :widths: {{ obj.widths_arg }}
+{%- endif %}
 {%- if obj.align is not none %}
     :align: {{ obj.align }}
 {%- endif %}

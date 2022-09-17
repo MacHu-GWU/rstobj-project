@@ -4,6 +4,7 @@
 table related directives.
 """
 
+import typing as T
 import attr
 from .base import Directive
 
@@ -19,6 +20,7 @@ class ListTable(Directive):
     :param title: str, optional.
     :param index: bool, use first column as index. default False.
     :param header: bool, use first row as header. default True.
+    :param widths: list of int
     :param align:
 
     Example::
@@ -47,6 +49,7 @@ class ListTable(Directive):
     title: str = attr.ib(default="")
     index: bool = attr.ib(default=False)
     header: bool = attr.ib(default=True)
+    widths: T.List[int] = attr.ib(default=None)
     align: str = attr.ib(default=None)
 
     meta_directive_keyword: str = "list-table"
@@ -66,6 +69,10 @@ class ListTable(Directive):
             raise ValueError(
                 "ListTable.align has to be one of 'left', 'center', 'right'!"
             )
+
+    @property
+    def widths_arg(self) -> str:
+        return " ".join([str(i) for i in self.widths])
 
     @property
     def arg(self) -> str:

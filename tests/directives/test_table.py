@@ -26,6 +26,19 @@ class TestListTable(object):
         rst = ltable.render()
         compare_with(rst, "rstobj.directives.table.ListTable.with-index.rst")
 
+    def test_with_widths(self):
+        ltable = ListTable(
+            data=[
+                ["2015-01-01", "this is very long sentence"],
+                ["2015-01-02", "this is very long sentence"],
+                ["2015-01-03", "this is very long sentence"],
+            ],
+            title="Daily Message",
+            widths=[20, 80],
+        )
+        rst = ltable.render()
+        compare_with(rst, "rstobj.directives.table.ListTable.with-widths.rst")
+
     def test_with_codeblock(self):
         ltable = ListTable(
             data=[
@@ -48,7 +61,7 @@ class TestListTable(object):
             ],
             title="Hello World Examples",
             index=False,
-            header=True
+            header=True,
         )
         rst = ltable.render()
         compare_with(rst, "rstobj.directives.table.ListTable.with-codeblock.rst")
