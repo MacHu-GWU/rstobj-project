@@ -21,12 +21,6 @@ Release and Version History
 
 - add ``widths`` option for ``ListTable``
 
-**Minor Improvements**
-
-**Bugfixes**
-
-**Miscellaneous**
-
 
 1.1.1 (2022-09-11)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
