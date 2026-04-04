@@ -1,10 +1,12 @@
 # -*- coding: utf-8 -*-
 
-import attr
+from __future__ import annotations
+
+from dataclasses import dataclass
 from ..base import RstObj
 
 
-@attr.s
+@dataclass(kw_only=True)
 class URI(RstObj):
     """
     Example::
@@ -16,14 +18,15 @@ class URI(RstObj):
 
         `Hello World <https://www.google.com>`_
     """
-    title: str = attr.ib()
-    link: str = attr.ib()
+
+    title: str
+    link: str
 
 
 URL = URI
 
 
-@attr.s
+@dataclass(kw_only=True)
 class Reference(RstObj):
     """
     Example::
@@ -35,8 +38,9 @@ class Reference(RstObj):
 
         :ref:`Hello World <hello-world>`
     """
-    title: str = attr.ib()
-    label: str = attr.ib()
+
+    title: str
+    label: str
 
 
 Ref = Reference

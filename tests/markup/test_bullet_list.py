@@ -5,7 +5,7 @@ from rstobj.tests import compare_with
 from rstobj.markup.bullet_list import BulletList
 
 
-class TestBulletList(object):
+class TestBulletList:
     def test(self):
         obj = BulletList(items="a,b,c".split(","))
         rst = obj.render()
@@ -13,7 +13,10 @@ class TestBulletList(object):
 
 
 if __name__ == "__main__":
-    import os
+    from rstobj.tests import run_cov_test
 
-    basename = os.path.basename(__file__)
-    pytest.main([basename, "-s", "--tb=native"])
+    run_cov_test(
+        __file__,
+        "rstobj.markup.bullet_list",
+        preview=False,
+    )

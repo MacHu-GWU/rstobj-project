@@ -4,11 +4,13 @@
 Bullet list.
 """
 
-import attr
+from __future__ import annotations
+
+from dataclasses import dataclass
 from ..base import RstObj
 
 
-@attr.s
+@dataclass(kw_only=True)
 class BulletList(RstObj):
     """
     Bullet list class.
@@ -26,4 +28,5 @@ class BulletList(RstObj):
 
     More example: http://docutils.sourceforge.net/docs/user/rst/quickref.html#bullet-lists
     """
-    items: list = attr.ib()
+
+    items: list

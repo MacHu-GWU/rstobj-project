@@ -4,14 +4,14 @@ import pytest
 from rstobj.markup.hyperlink import URI, Reference
 
 
-class TestURI(object):
+class TestURI:
     def test(self):
         obj = URI(title="Python Homepage", link="https://www.python.org")
         rst = obj.render()
         assert rst == "`Python Homepage <https://www.python.org>`_"
 
 
-class TestReference(object):
+class TestReference:
     def test(self):
         obj = Reference(title="Section1", label="section1")
         rst = obj.render()
@@ -19,7 +19,10 @@ class TestReference(object):
 
 
 if __name__ == "__main__":
-    import os
+    from rstobj.tests import run_cov_test
 
-    basename = os.path.basename(__file__)
-    pytest.main([basename, "-s", "--tb=native"])
+    run_cov_test(
+        __file__,
+        "rstobj.markup.hyperlink",
+        preview=False,
+    )

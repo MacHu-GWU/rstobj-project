@@ -14,7 +14,10 @@ Default `section header line <http://docutils.sourceforge.net/docs/user/rst/quic
 - header 7: ``^``
 """
 
-import attr
+from __future__ import annotations
+
+import typing as T
+from dataclasses import dataclass, field
 from ..base import RstObj
 
 dash_char_list = " _~"
@@ -49,7 +52,7 @@ HEADER_CHAR_MAPPER = {
 DEFAULT_HEADER_LEVEL = 1
 
 
-@attr.s
+@dataclass(kw_only=True)
 class Header(RstObj):
     """
     A `Section Header <http://docutils.sourceforge.net/docs/user/rst/quickstart.html#sections>`_ markup.
@@ -73,22 +76,18 @@ class Header(RstObj):
         Hello World
         ===========
     """
-    title: str = attr.ib()
-    header_level: int = attr.ib(default=DEFAULT_HEADER_LEVEL)
-    ref_label: str = attr.ib(default=None)
-    auto_label: bool = attr.ib(default=False)
-    bar_length: int = attr.ib(default=None)
 
-    meta_not_none_fields = ("header_level",)
+    title: str
+    header_level: int | None = field(default=DEFAULT_HEADER_LEVEL)
+    ref_label: str | None = field(default=None)
+    auto_label: bool = field(default=False)
+    bar_length: int | None = field(default=None)
 
-    @header_level.validator
-    def header_level_validator(self, attribute, value):
-        if value is not None:
-            if not (1 <= value <= 7):
-                raise ValueError("header_level has to be between 1 - 7!")
-
-    def __attrs_post_init__(self):
-        super(Header, self).__attrs_post_init__()
+    def __post_init__(self):
+        if self.header_level is None:
+            raise ValueError("`Header.header_level` can't be None!")
+        if not (1 <= self.header_level <= 7):
+            raise ValueError("header_level has to be between 1 - 7!")
 
         if self.auto_label and (self.ref_label is None):
             self.ref_label = to_label(self.title)
@@ -98,26 +97,19 @@ class Header(RstObj):
             self.bar_length = title_length
         elif self.bar_length < title_length:
             self.bar_length = title_length
-        else:
-            pass
 
     @property
     def header_char(self) -> str:
-        """
-        """
         return HEADER_CHAR_MAPPER[self.header_level]
 
     @property
-    def template_name(self):
-        """
-        :rtype: str
-        """
+    def template_name(self) -> str:
         return "{}.{}.rst".format(self.__module__, "Header")
 
 
-@attr.s
+@dataclass(kw_only=True)
 class HeaderLevel(Header):
-    meta_not_none_fields = tuple()
+    pass
 
 
 header_doc_string = """
@@ -128,57 +120,50 @@ Example::
 """.strip()
 
 
-def _build_doc_string(header_level):
+def _build_doc_string(header_level: int) -> str:
     return header_doc_string.format(
         level=header_level,
         bar=HEADER_CHAR_MAPPER[header_level] * 7,
     )
 
 
-@attr.s
+@dataclass(kw_only=True)
 class Header1(HeaderLevel):
     __doc__ = _build_doc_string(1)
+    header_level: int = field(default=1)
 
-    header_level: int = attr.ib(default=1)
 
-
-@attr.s
+@dataclass(kw_only=True)
 class Header2(HeaderLevel):
     __doc__ = _build_doc_string(2)
+    header_level: int = field(default=2)
 
-    header_level: int = attr.ib(default=2)
 
-
-@attr.s
+@dataclass(kw_only=True)
 class Header3(HeaderLevel):
     __doc__ = _build_doc_string(3)
+    header_level: int = field(default=3)
 
-    header_level: int = attr.ib(default=3)
 
-
-@attr.s
+@dataclass(kw_only=True)
 class Header4(HeaderLevel):
     __doc__ = _build_doc_string(4)
+    header_level: int = field(default=4)
 
-    header_level: int = attr.ib(default=4)
 
-
-@attr.s
+@dataclass(kw_only=True)
 class Header5(HeaderLevel):
     __doc__ = _build_doc_string(5)
+    header_level: int = field(default=5)
 
-    header_level: int = attr.ib(default=5)
 
-
-@attr.s
+@dataclass(kw_only=True)
 class Header6(HeaderLevel):
     __doc__ = _build_doc_string(6)
+    header_level: int = field(default=6)
 
-    header_level: int = attr.ib(default=6)
 
-
-@attr.s
+@dataclass(kw_only=True)
 class Header7(HeaderLevel):
     __doc__ = _build_doc_string(7)
-
-    header_level: int = attr.ib(default=7)
+    header_level: int = field(default=7)

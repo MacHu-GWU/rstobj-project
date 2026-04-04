@@ -5,11 +5,11 @@ from rstobj.tests import compare_with
 from rstobj.markup.header import Header, Header2
 
 
-class TestHeader(object):
+class TestHeader:
     def test_init(self):
         with pytest.raises(ValueError):
             Header(title="Section 1", header_level=None)
-            
+
     def test_no_ref_key(self):
         header = Header(title="Section 1", header_level=1, bar_length=80)
         rst = header.render()
@@ -42,7 +42,7 @@ class TestHeader(object):
             Header(title="Section", header_level=8)
 
 
-class TestHeader2(object):
+class TestHeader2:
     def test_has_ref_key_auto_bar(self):
         header = Header2(title="Section 1.1", ref_label="section_1_1")
         rst = header.render()
@@ -55,7 +55,10 @@ class TestHeader2(object):
 
 
 if __name__ == "__main__":
-    import os
+    from rstobj.tests import run_cov_test
 
-    basename = os.path.basename(__file__)
-    pytest.main([basename, "-s", "--tb=native"])
+    run_cov_test(
+        __file__,
+        "rstobj.markup.header",
+        preview=False,
+    )

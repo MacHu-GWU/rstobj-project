@@ -5,7 +5,7 @@ from rstobj.tests import compare_with
 from rstobj.markup.enum_list import EnumList
 
 
-class TestEnumList(object):
+class TestEnumList:
     def test(self):
         obj = EnumList(items="a,b,c".split(","), start_num=3)
         rst = obj.render()
@@ -13,7 +13,10 @@ class TestEnumList(object):
 
 
 if __name__ == "__main__":
-    import os
+    from rstobj.tests import run_cov_test
 
-    basename = os.path.basename(__file__)
-    pytest.main([basename, "-s", "--tb=native"])
+    run_cov_test(
+        __file__,
+        "rstobj.markup.enum_list",
+        preview=False,
+    )
