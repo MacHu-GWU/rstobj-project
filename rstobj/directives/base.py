@@ -1,15 +1,18 @@
 # -*- coding: utf-8 -*-
 
-import attr
+from __future__ import annotations
+
+from dataclasses import dataclass, field
+from typing import ClassVar
 from ..base import RstObj
 
 
-@attr.s
+@dataclass(kw_only=True)
 class Directive(RstObj):
-    class_: str = attr.ib(default=None)
-    name: str = attr.ib(default=None)
+    class_: str | None = field(default=None)
+    name: str | None = field(default=None)
 
-    meta_directive_keyword: str = None
+    meta_directive_keyword: ClassVar[str | None] = None
 
     @property
     def arg(self):  # pragma: no cover

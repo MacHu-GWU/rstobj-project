@@ -4,10 +4,10 @@
 RestructuredText Object abstraction.
 """
 
-import typing as T
+from __future__ import annotations
 
-import attr
-from attrs_mate import AttrsClass
+import typing as T
+from dataclasses import dataclass
 
 if T.TYPE_CHECKING:  # pragma: no cover
     from jinja2 import Template
@@ -16,46 +16,31 @@ from .templates import env
 from .option import Options
 
 
-@attr.s
-class RstObj(AttrsClass):
+@dataclass(kw_only=True)
+class RstObj:
     """
     The base restructured text object.
     """
-    meta_not_none_fields = tuple()
-
-    def validate_not_none_fields(self):
-        for field in self.meta_not_none_fields:
-            if getattr(self, field) is None:  # pragma: no cover
-                msg = "`{}.{}` can't be None!" \
-                    .format(self.__class__.__name__, field)
-                raise ValueError(msg)
-
-    def __attrs_post_init__(self):
-        self.validate_not_none_fields()
 
     @property
     def template_name(self) -> str:
         """
         Find template file.
-
-        :rtype: str
         """
         return "{}.{}.rst".format(self.__module__, self.__class__.__name__)
 
     @property
-    def template(self) -> 'Template':
+    def template(self) -> Template:
         """
         Return ``jinja2.Template`` instance.
-
-        :rtype: str
         """
         return env.get_template(self.template_name)
 
     def render(
         self,
-        indent: int = None,
-        first_line_indent: int = None,
-        **kwargs
+        indent: int | None = None,
+        first_line_indent: int | None = None,
+        **kwargs,
     ) -> str:
         """
         Render this object into text.
@@ -88,14 +73,12 @@ class RstObj(AttrsClass):
 
     @staticmethod
     def str_or_render(
-        value: T.Union[str, 'RstObj'],
-        **kwargs
-    ):
+        value: str | RstObj,
+        **kwargs,
+    ) -> str:
         """
         If it is a string type, then just return. If it is a RstObj type,
         then return the rendered string.
-
-        :rtype: str
         """
         if isinstance(value, RstObj):
             return value.render(**kwargs)

@@ -4,22 +4,22 @@
 code block related directives.
 """
 
-import attr
+import typing as T
+from dataclasses import dataclass
 from .base import Directive
 from ..base import RstObj
 
 
-@attr.s
+@dataclass(kw_only=True)
 class Code(RstObj):
     """
     Pure text code Snippet.
     """
-    text: str = attr.ib(default=None)
 
-    meta_not_none_fields = ("text",)
+    text: str
 
 
-@attr.s
+@dataclass(kw_only=True)
 class CodeBlockEmpty(Directive):
     """
     Example::
@@ -34,12 +34,8 @@ class CodeBlockEmpty(Directive):
 
             your code ...
     """
-    code = attr.ib(
-        default=None,
-        validator=attr.validators.instance_of(Code)
-    )  # type: Code
 
-    meta_not_none_fields = ("code",)
+    code: Code
 
     @classmethod
     def from_string(cls, text: str):
@@ -49,18 +45,19 @@ class CodeBlockEmpty(Directive):
         return cls(code=Code(text=text))
 
 
-@attr.s
+@dataclass(kw_only=True)
 class CodeBlockBase(CodeBlockEmpty):
     """
     Base class for language specified code block.
     """
 
-    meta_lang: str = ""
+    meta_lang: T.ClassVar[str] = ""
 
-    class LangOptions(object):
+    class LangOptions:
         """
         Full list can be found here https://pygments.org/docs/lexers/
         """
+
         empty = ""
         python = "python"
         ruby = "ruby"
@@ -101,103 +98,103 @@ Output::
 """.strip()
 
 
-@attr.s
+@dataclass(kw_only=True)
 class CodeBlock(CodeBlockBase):
     meta_lang = CodeBlockBase.LangOptions.empty
     __doc__ = code_block_doc_string.format(meta_lang)
 
 
-@attr.s
+@dataclass(kw_only=True)
 class CodeBlockPython(CodeBlockBase):
     meta_lang = CodeBlockBase.LangOptions.python
     __doc__ = code_block_doc_string.format(meta_lang)
 
 
-@attr.s
+@dataclass(kw_only=True)
 class CodeBlockRuby(CodeBlockBase):
     meta_lang = CodeBlockBase.LangOptions.ruby
     __doc__ = code_block_doc_string.format(meta_lang)
 
 
-@attr.s
+@dataclass(kw_only=True)
 class CodeBlockR(CodeBlockBase):
     meta_lang = CodeBlockBase.LangOptions.r
     __doc__ = code_block_doc_string.format(meta_lang)
 
 
-@attr.s
+@dataclass(kw_only=True)
 class CodeBlockPerl(CodeBlockBase):
     meta_lang = CodeBlockBase.LangOptions.perl
     __doc__ = code_block_doc_string.format(meta_lang)
 
 
-@attr.s
+@dataclass(kw_only=True)
 class CodeBlockC(CodeBlockBase):
     meta_lang = CodeBlockBase.LangOptions.c
     __doc__ = code_block_doc_string.format(meta_lang)
 
 
-@attr.s
+@dataclass(kw_only=True)
 class CodeBlockCPP(CodeBlockBase):
     meta_lang = CodeBlockBase.LangOptions.cpp
     __doc__ = code_block_doc_string.format(meta_lang)
 
 
-@attr.s
+@dataclass(kw_only=True)
 class CodeBlockHTML(CodeBlockBase):
     meta_lang = CodeBlockBase.LangOptions.html
     __doc__ = code_block_doc_string.format(meta_lang)
 
 
-@attr.s
+@dataclass(kw_only=True)
 class CodeBlockCSS(CodeBlockBase):
     meta_lang = CodeBlockBase.LangOptions.css
     __doc__ = code_block_doc_string.format(meta_lang)
 
 
-@attr.s
+@dataclass(kw_only=True)
 class CodeBlockJavaScript(CodeBlockBase):
     meta_lang = CodeBlockBase.LangOptions.javascript
     __doc__ = code_block_doc_string.format(meta_lang)
 
 
-@attr.s
+@dataclass(kw_only=True)
 class CodeBlockSQL(CodeBlockBase):
     meta_lang = CodeBlockBase.LangOptions.sql
     __doc__ = code_block_doc_string.format(meta_lang)
 
 
-@attr.s
+@dataclass(kw_only=True)
 class CodeBlockScala(CodeBlockBase):
     meta_lang = CodeBlockBase.LangOptions.scala
     __doc__ = code_block_doc_string.format(meta_lang)
 
 
-@attr.s
+@dataclass(kw_only=True)
 class CodeBlockMake(CodeBlockBase):
     meta_lang = CodeBlockBase.LangOptions.make
     __doc__ = code_block_doc_string.format(meta_lang)
 
 
-@attr.s
+@dataclass(kw_only=True)
 class CodeBlockBash(CodeBlockBase):
     meta_lang = CodeBlockBase.LangOptions.bash
     __doc__ = code_block_doc_string.format(meta_lang)
 
 
-@attr.s
+@dataclass(kw_only=True)
 class CodeBlockLua(CodeBlockBase):
     meta_lang = CodeBlockBase.LangOptions.lua
     __doc__ = code_block_doc_string.format(meta_lang)
 
 
-@attr.s
+@dataclass(kw_only=True)
 class CodeBlockRst(CodeBlockBase):
     meta_lang = CodeBlockBase.LangOptions.restructuredText
     __doc__ = code_block_doc_string.format(meta_lang)
 
 
-@attr.s
+@dataclass(kw_only=True)
 class CodeBlockMarkdown(CodeBlockBase):
     meta_lang = CodeBlockBase.LangOptions.markdown
     __doc__ = code_block_doc_string.format(meta_lang)
