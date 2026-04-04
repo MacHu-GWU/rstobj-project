@@ -4,11 +4,14 @@
 image related directives.
 """
 
-import attr
+from __future__ import annotations
+
+import typing as T
+from dataclasses import dataclass, field
 from .base import Directive
 
 
-@attr.s
+@dataclass(kw_only=True)
 class Image(Directive):
     """
     The ``.. image::`` directive.
@@ -41,26 +44,17 @@ class Image(Directive):
             :alt: Image Not Found
             :align: center
     """
-    uri: str = attr.ib(default=None)
-    height: int = attr.ib(
-        default=None,
-        validator=attr.validators.optional(attr.validators.instance_of(int)),
-    )
-    width: int = attr.ib(
-        default=None,
-        validator=attr.validators.optional(attr.validators.instance_of(int)),
-    )
-    scale: int = attr.ib(
-        default=None,
-        validator=attr.validators.optional(attr.validators.instance_of(int)),
-    )
-    alt_text: str = attr.ib(default=None)
-    align: str = attr.ib(default=None)
 
-    meta_directive_keyword: str = "image"
-    meta_not_none_fields: tuple = ("uri",)
+    uri: str
+    height: int | None = field(default=None)
+    width: int | None = field(default=None)
+    scale: int | None = field(default=None)
+    alt_text: str | None = field(default=None)
+    align: str | None = field(default=None)
 
-    class AlignOptions(object):
+    meta_directive_keyword: T.ClassVar[str] = "image"
+
+    class AlignOptions:
         """
         ``align`` argument choices.
 
@@ -71,6 +65,7 @@ class Image(Directive):
         - ``Image.AlignOptions.middle``: ``"middle"``
         - ``Image.AlignOptions.bottom``: ``"bottom"``
         """
+
         left = "left"
         center = "center"
         right = "right"
@@ -78,16 +73,12 @@ class Image(Directive):
         middle = "middle"
         bottom = "bottom"
 
-    @align.validator
-    def check_align(self, attribute, value):  # pragma: no cover
-        if value not in [None, "left", "center", "right", "top", "middle", "bottom"]:
+    def __post_init__(self):
+        if self.align not in [None, "left", "center", "right", "top", "middle", "bottom"]:  # pragma: no cover
             raise ValueError(
-                "ListTable.align has to be one of 'left', 'center', 'right', 'top', 'middle', 'bottom'!"
+                "Image.align has to be one of 'left', 'center', 'right', 'top', 'middle', 'bottom'!"
             )
 
     @property
-    def arg(self):
-        """
-        :rtype:
-        """
+    def arg(self) -> str:
         return self.uri

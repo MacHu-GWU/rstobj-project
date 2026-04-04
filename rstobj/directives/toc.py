@@ -4,11 +4,14 @@
 table of content directive.
 """
 
-import attr
+from __future__ import annotations
+
+import typing as T
+from dataclasses import dataclass, field
 from .base import Directive
 
 
-@attr.s
+@dataclass(kw_only=True)
 class TableOfContent(Directive):
     """
     ``.. contents::`` directive.
@@ -33,24 +36,15 @@ class TableOfContent(Directive):
         .. contents:: Table of Contents
             :depth: 2
     """
-    title: str = attr.ib(default=None)
-    depth: int = attr.ib(
-        default=None,
-        validator=attr.validators.optional(attr.validators.instance_of(int)),
-    )
-    local: bool = attr.ib(
-        default=False,
-        validator=attr.validators.optional(attr.validators.instance_of(bool)),
-    )
-    backlinks: str = attr.ib(
-        default=None,
-        validator=attr.validators.optional(attr.validators.instance_of(str)),
-    )
 
-    meta_directive_keyword: str = "contents"
-    meta_not_none_fields: tuple = tuple()
+    title: str | None = field(default=None)
+    depth: int | None = field(default=None)
+    local: bool = field(default=False)
+    backlinks: str | None = field(default=None)
 
-    class BacklinksOptions(object):
+    meta_directive_keyword: T.ClassVar[str] = "contents"
+
+    class BacklinksOptions:
         """
         ``backlinks`` argument choices.
 
@@ -58,13 +52,13 @@ class TableOfContent(Directive):
         - ``TableOfContent.BacklinksOptions.top``: ``"top"``
         - ``TableOfContent.BacklinksOptions.none``: ``"none"``
         """
+
         entry = "entry"
         top = "top"
         none = "none"
 
-    @backlinks.validator
-    def check_backlinks(self, attribute, value):  # pragma: no cover
-        if value not in [None, "entry", "top", "none"]:
+    def __post_init__(self):
+        if self.backlinks not in [None, "entry", "top", "none"]:  # pragma: no cover
             raise ValueError(
                 "TableOfContent.backlinks has to be one of 'entry', 'top', 'none'!"
             )

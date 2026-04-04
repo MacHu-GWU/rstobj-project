@@ -6,7 +6,7 @@ from rstobj.directives.table import ListTable
 from rstobj.directives.codeblock import Code, CodeBlock
 
 
-class TestListTable(object):
+class TestListTable:
     def test_with_header(self):
         ltable = ListTable(
             data=[["id", "name"], [1, "Alice"], [2, "Bob"]],
@@ -49,13 +49,13 @@ class TestListTable(object):
                 [
                     "python2",
                     CodeBlock(
-                        code=Code("from __future__ import print_function\n\nprint('Hello World!')")
+                        code=Code(text="from __future__ import print_function\n\nprint('Hello World!')")
                     )
                 ],
                 [
                     "python3",
                     CodeBlock(
-                        code=Code("from __future__ import print_function\n\nprint('Hello World!')")
+                        code=Code(text="from __future__ import print_function\n\nprint('Hello World!')")
                     )
                 ]
             ],
@@ -71,7 +71,10 @@ class TestListTable(object):
 
 
 if __name__ == "__main__":
-    import os
+    from rstobj.tests import run_cov_test
 
-    basename = os.path.basename(__file__)
-    pytest.main([basename, "-s", "--tb=native"])
+    run_cov_test(
+        __file__,
+        "rstobj.directives.table",
+        preview=False,
+    )

@@ -4,12 +4,14 @@
 table related directives.
 """
 
+from __future__ import annotations
+
 import typing as T
-import attr
+from dataclasses import dataclass, field
 from .base import Directive
 
 
-@attr.s
+@dataclass(kw_only=True)
 class ListTable(Directive):
     """
     List Tabulate Table.
@@ -45,27 +47,27 @@ class ListTable(Directive):
               - Value2
               - Value3
     """
-    data: list = attr.ib(default=None)
-    title: str = attr.ib(default="")
-    index: bool = attr.ib(default=False)
-    header: bool = attr.ib(default=True)
-    widths: T.List[int] = attr.ib(default=None)
-    align: str = attr.ib(default=None)
 
-    meta_directive_keyword: str = "list-table"
-    meta_not_none_fields: tuple = ("data",)
+    data: list
+    title: str = field(default="")
+    index: bool = field(default=False)
+    header: bool = field(default=True)
+    widths: list[int] | None = field(default=None)
+    align: str | None = field(default=None)
 
-    class AlignOptions(object):
+    meta_directive_keyword: T.ClassVar[str] = "list-table"
+
+    class AlignOptions:
         """
         ``align`` parameter choices.
         """
+
         left = "left"
         center = "center"
         right = "right"
 
-    @align.validator
-    def check_align(self, attribute, value):
-        if value not in [None, "left", "center", "right"]:  # pragma: no cover
+    def __post_init__(self):
+        if self.align not in [None, "left", "center", "right"]:  # pragma: no cover
             raise ValueError(
                 "ListTable.align has to be one of 'left', 'center', 'right'!"
             )

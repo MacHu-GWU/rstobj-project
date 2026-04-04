@@ -5,7 +5,7 @@ from rstobj.tests import compare_with
 from rstobj.directives.miscellaneous import Include
 
 
-class TestInclude(object):
+class TestInclude:
     def test(self):
         include = Include(
             path="README.rst",
@@ -15,7 +15,10 @@ class TestInclude(object):
 
 
 if __name__ == "__main__":
-    import os
+    from rstobj.tests import run_cov_test
 
-    basename = os.path.basename(__file__)
-    pytest.main([basename, "-s", "--tb=native"])
+    run_cov_test(
+        __file__,
+        "rstobj.directives.miscellaneous",
+        preview=False,
+    )

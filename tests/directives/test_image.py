@@ -5,7 +5,7 @@ from rstobj.tests import compare_with
 from rstobj.directives.image import Image
 
 
-class TestImage(object):
+class TestImage:
     def test(self):
         image = Image(
             uri="https://www.python.org/static/img/python-logo.png",
@@ -32,7 +32,10 @@ class TestImage(object):
 
 
 if __name__ == "__main__":
-    import os
+    from rstobj.tests import run_cov_test
 
-    basename = os.path.basename(__file__)
-    pytest.main([basename, "-s", "--tb=native"])
+    run_cov_test(
+        __file__,
+        "rstobj.directives.image",
+        preview=False,
+    )

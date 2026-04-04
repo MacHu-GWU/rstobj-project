@@ -2,8 +2,8 @@
 
 from __future__ import annotations
 
+import typing as T
 from dataclasses import dataclass, field
-from typing import ClassVar
 from ..base import RstObj
 
 
@@ -12,7 +12,7 @@ class Directive(RstObj):
     class_: str | None = field(default=None)
     name: str | None = field(default=None)
 
-    meta_directive_keyword: ClassVar[str | None] = None
+    meta_directive_keyword: T.ClassVar[str | None] = None
 
     @property
     def arg(self):  # pragma: no cover

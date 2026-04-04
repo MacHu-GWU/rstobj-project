@@ -5,7 +5,7 @@ from rstobj.tests import compare_with
 from rstobj.directives.toc import TableOfContent
 
 
-class TestTableOfContent(object):
+class TestTableOfContent:
     def test(self):
         toc = TableOfContent()
         rst = toc.render()
@@ -23,7 +23,10 @@ class TestTableOfContent(object):
 
 
 if __name__ == "__main__":
-    import os
+    from rstobj.tests import run_cov_test
 
-    basename = os.path.basename(__file__)
-    pytest.main([basename, "-s", "--tb=native"])
+    run_cov_test(
+        __file__,
+        "rstobj.directives.toc",
+        preview=False,
+    )

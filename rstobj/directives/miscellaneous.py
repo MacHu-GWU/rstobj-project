@@ -4,11 +4,14 @@
 Other directives.
 """
 
-import attr
+from __future__ import annotations
+
+import typing as T
+from dataclasses import dataclass, field
 from .base import Directive
 
 
-@attr.s
+@dataclass(kw_only=True)
 class Include(Directive):
     """
     ``.. include::`` directive. Include an external document fragment.
@@ -24,19 +27,19 @@ class Include(Directive):
 
     Parameters definition see here http://docutils.sourceforge.net/docs/ref/rst/directives.html#including-an-external-document-fragment.
     """
-    path: str = attr.ib(default=None)
-    start_line: int = attr.ib(default=None)
-    end_line: int = attr.ib(default=None)
-    start_after: str = attr.ib(default=None)
-    end_before: str = attr.ib(default=None)
-    literal: bool = attr.ib(default=None)
-    code: str = attr.ib(default=None)
-    number_lines: int = attr.ib(default=None)
-    encoding: str = attr.ib(default=None)
-    tab_width: int = attr.ib(default=None)
 
-    meta_directive_keyword: str = "include"
-    meta_not_none_fields: tuple = ("path",)
+    path: str
+    start_line: int | None = field(default=None)
+    end_line: int | None = field(default=None)
+    start_after: str | None = field(default=None)
+    end_before: str | None = field(default=None)
+    literal: bool | None = field(default=None)
+    code: str | None = field(default=None)
+    number_lines: int | None = field(default=None)
+    encoding: str | None = field(default=None)
+    tab_width: int | None = field(default=None)
+
+    meta_directive_keyword: T.ClassVar[str] = "include"
 
     @property
     def arg(self) -> str:

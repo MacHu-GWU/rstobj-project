@@ -16,14 +16,14 @@ class User(object):
 """.strip()
 
 
-class TestCode(object):
+class TestCode:
     def test_render_indent(self):
         code = Code(text=cb_user_class)
         rst = code.render(indent=1)
         compare_with(rst, "rstobj.directives.codeblock.Code.render-indent.rst")
 
 
-class TestCodeBlockEmpty(object):
+class TestCodeBlockEmpty:
     def test_render(self):
         cb = CodeBlockEmpty(code=Code(text=cb_user_class))
         rst = cb.render()
@@ -35,14 +35,14 @@ class TestCodeBlockEmpty(object):
         )
 
 
-class TestCodeBlock(object):
+class TestCodeBlock:
     def test_render(self):
         cb = CodeBlock(code=Code(text=cb_user_class))
         rst = cb.render()
         compare_with(rst, "rstobj.directives.codeblock.CodeBlock.render.rst")
 
 
-class TestCodeBlockPython(object):
+class TestCodeBlockPython:
     def test_render(self):
         cb = CodeBlockPython.from_string(cb_user_class)
         rst = cb.render()
