@@ -2,11 +2,12 @@
 # for more info: https://coverage.readthedocs.io/en/latest/config.html
 [run]
 omit =
-    rstobj/_version.py
-    rstobj/pkg/*
     rstobj/docs/*
     rstobj/tests/*
-    rstobj/demo.py
+    rstobj/vendor/*
+    rstobj/_version.py
+    rstobj/cli.py
+    rstobj/paths.py
 
 [report]
 # Regexes for lines to exclude from consideration

@@ -2,6 +2,8 @@
 
 import os
 
+from .helper import run_unit_test, run_cov_test
+
 here = os.path.dirname(__file__)
 
 
@@ -13,10 +15,7 @@ def get_rst(filename: str) -> str:
 
 
 def edit_rst(rst: str) -> str:
-    return "\n".join([
-        line.rstrip()
-        for line in rst.split("\n")
-    ]).strip()
+    return "\n".join([line.rstrip() for line in rst.split("\n")]).strip()
 
 
 def compare_with(rst: str, filename: str):

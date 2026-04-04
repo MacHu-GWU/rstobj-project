@@ -5,7 +5,7 @@ if __name__ == "__main__":
 
     run_cov_test(
         __file__,
-        "rstobj.markup",
+        "rstobj.directives",
         is_folder=True,
         preview=False,
     )

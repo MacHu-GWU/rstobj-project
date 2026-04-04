@@ -1,12 +1,12 @@
 
 .. image:: https://readthedocs.org/projects/rstobj/badge/?version=latest
-    :target: https://rstobj.readthedocs.io/index.html
+    :target: https://rstobj.readthedocs.io/en/latest/
     :alt: Documentation Status
 
-.. image:: https://github.com/MacHu-GWU/rstobj-project/workflows/CI/badge.svg
+.. image:: https://github.com/MacHu-GWU/rstobj-project/actions/workflows/main.yml/badge.svg
     :target: https://github.com/MacHu-GWU/rstobj-project/actions?query=workflow:CI
 
-.. image:: https://codecov.io/gh/MacHu-GWU/rstobj-project/branch/master/graph/badge.svg
+.. image:: https://codecov.io/gh/MacHu-GWU/rstobj-project/branch/main/graph/badge.svg
     :target: https://codecov.io/gh/MacHu-GWU/rstobj-project
 
 .. image:: https://img.shields.io/pypi/v/rstobj.svg
@@ -18,20 +18,16 @@
 .. image:: https://img.shields.io/pypi/pyversions/rstobj.svg
     :target: https://pypi.python.org/pypi/rstobj
 
-.. image:: https://img.shields.io/badge/STAR_Me_on_GitHub!--None.svg?style=social
+.. image:: https://img.shields.io/badge/✍️_Release_History!--None.svg?style=social&logo=github
+    :target: https://github.com/MacHu-GWU/rstobj-project/blob/main/release-history.rst
+
+.. image:: https://img.shields.io/badge/⭐_Star_me_on_GitHub!--None.svg?style=social&logo=github
     :target: https://github.com/MacHu-GWU/rstobj-project
 
 ------
 
-
-.. image:: https://img.shields.io/badge/Link-Document-blue.svg
-    :target: https://rstobj.readthedocs.io/index.html
-
 .. image:: https://img.shields.io/badge/Link-API-blue.svg
-    :target: https://rstobj.readthedocs.io/py-modindex.html
-
-.. image:: https://img.shields.io/badge/Link-Source_Code-blue.svg
-    :target: https://rstobj.readthedocs.io/py-modindex.html
+    :target: https://rstobj.readthedocs.io/en/latest/py-modindex.html
 
 .. image:: https://img.shields.io/badge/Link-Install-blue.svg
     :target: `install`_
@@ -51,6 +47,8 @@
 
 Welcome to ``rstobj`` Documentation
 ==============================================================================
+.. image:: https://rstobj.readthedocs.io/en/latest/_static/rstobj-logo.png
+    :target: https://rstobj.readthedocs.io/en/latest/
 
 ``rstobj`` is a library that construct Restructured Text markup or directives from Python Code. ``rstobj`` is based on ``jinja2``.
 
