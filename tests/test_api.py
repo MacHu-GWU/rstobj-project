@@ -5,17 +5,8 @@ from rstobj import api
 
 def test():
     _ = api
-    _ = api.markup.URI
-    _ = api.markup.URL
-    _ = api.markup.Header
-    _ = api.markup.Header7
-    _ = api.markup.BulletList
-    _ = api.markup.EnumList
-    _ = api.directives.Image
-    _ = api.directives.ListTable
-    _ = api.directives.CodeBlock
-    _ = api.directives.CodeBlockEmpty
-    _ = api.directives.CodeBlockPython
+    _ = api.markup
+    _ = api.directives
 
 
 if __name__ == "__main__":
