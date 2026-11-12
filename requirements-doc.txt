@@ -77,6 +77,6 @@ tornado==6.6.1
 traitlets==5.14.3
 typing-extensions==4.15.0 ; python_full_version >= '3.12' and sys_platform == 'emscripten'
 typing-extensions==4.16.0 ; python_full_version < '3.12' or sys_platform != 'emscripten'
-urllib3==2.6.3
+urllib3==2.8.0
 wcwidth==0.6.0
 webencodings==0.5.1

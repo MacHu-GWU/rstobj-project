@@ -20,4 +20,4 @@ requests==2.33.1
 truststore==0.10.5 ; sys_platform != 'emscripten'
 typing-extensions==4.15.0 ; python_full_version >= '3.12' and sys_platform == 'emscripten'
 typing-extensions==4.16.0 ; python_full_version < '3.12' or sys_platform != 'emscripten'
-urllib3==2.6.3
+urllib3==2.8.0
