@@ -6,7 +6,9 @@ What this library does: see `README.rst`.
 
 Package: `rstobj/` (import name `rstobj`).
 
-How to maintain this library: the `maintain-rstobj-*` skills, once they exist (create them with `pywf-oss-write-maintain-skill`).
+How to maintain this library: load the `maintain-rstobj-base` skill before changing any module, template, test case, or snapshot. Jobs: `maintain-rstobj-add-object` (new markup or directive class), `maintain-rstobj-change-output` (change what a class renders, and pick the release type).
+
+How to use this library from another project: the `pypi-rstobj` skill (`.claude/skills/pypi-rstobj/`), which documents the 2.0.1 public API.
 
 <!-- END project block -->
 

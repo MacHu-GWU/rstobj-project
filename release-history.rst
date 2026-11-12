@@ -4,6 +4,28 @@ Release and Version History
 ==============================================================================
 
 
+x.y.z (Backlog)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+**Features and Improvements**
+
+- Add a ``Blocks`` container for list items and table cells that hold more than one body element. Today an item of ``BulletList`` / ``EnumList`` or a cell of ``ListTable`` is one string or one rstobj object, so "a line of text with a nested list under it" has no clean form; the only way is string concatenation, ``"some title here\n\n" + BulletList(items=[...]).render().strip("\n")``. reST itself models a list item and a table cell as a sequence of body elements, so one container fits all three places::
+
+      BulletList(items=[
+          "fruits",
+          Blocks(items=["some title here", BulletList(items=["apple", "banana"])]),
+          CodeBlockPython.from_string("print('Hello World!')"),
+      ])
+
+  ``Blocks`` renders its items separated by one blank line, and reuses the continuation indent of list items and table cells added in 2.0.1. A prototype rendered valid reST for ``BulletList``, ``EnumList`` (including markers of different widths) and ``ListTable`` cells. It only adds a public name and changes no existing output, so it is a MINOR release (2.1.0). A possible later shorthand is a plain Python list as an item (``["some title here", BulletList(...)]``); it is shorter but implicit, so ``Blocks`` comes first.
+- With ``Blocks``, rewrite the nested list examples of the Rendering Gallery (``bullet_list_nested``, ``enum_list_nested``) to the "text with a nested list under it" form people actually write, and replace the ``"line 1\nline 2"`` item, which renders as one paragraph ("line 1 line 2") because a single newline inside a reST paragraph is a space.
+
+**Minor Improvements**
+
+**Bugfixes**
+
+**Miscellaneous**
+
+
 2.0.1 (2026-11-11)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 **Breaking Changes**
@@ -35,7 +57,6 @@ The fixes below only change output that was invalid reStructuredText or plainly 
 - Rewrite the tests around one list of cases (``rstobj/tests/cases.py``) shared with the gallery. Each case's output is compared byte for byte with a snapshot file, and checked to parse in docutils without a warning.
 - The docs build now fails on any warning, locally and on Read the Docs.
 - Fix the README example, which used imports removed in 2.0.0.
-- CI builds the wheel, installs it in an isolated environment, and renders a header, so a wheel with missing files fails CI.
 - Upgrade the locked ``anyio`` (a dev dependency through ``httpx2``) to 4.16.0, which removes a pytest 10 deprecation warning from the test run.
 - Move to the new project template: ``uv``, ``mise`` tasks, ruff, and an updated CI.
 

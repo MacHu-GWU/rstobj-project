@@ -150,3 +150,16 @@ To upgrade to latest version:
 .. code-block:: console
 
     $ pip install --upgrade rstobj
+
+.. _use-with-ai-coding-agents:
+
+Use with AI Coding Agents
+------------------------------------------------------------------------------
+
+This repo ships an `Agent Skill <https://code.claude.com/docs/en/skills>`_ that documents the public API of ``rstobj``, so an AI coding agent such as Claude Code can use the library without reading its source. It lives in `.claude/skills/pypi-rstobj <https://github.com/MacHu-GWU/rstobj-project/tree/main/.claude/skills/pypi-rstobj>`_. To use it in your project, copy it into your project's ``.claude/skills/`` folder. Run this from your project's root:
+
+.. code-block:: console
+
+    $ git clone --depth 1 https://github.com/MacHu-GWU/rstobj-project.git /tmp/rstobj-project
+    $ mkdir -p .claude/skills
+    $ cp -R /tmp/rstobj-project/.claude/skills/pypi-rstobj .claude/skills/

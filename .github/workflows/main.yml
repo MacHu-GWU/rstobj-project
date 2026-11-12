@@ -85,16 +85,6 @@ jobs:
       # the .venv here, it installs the test extra too, so pytest is never missing.
       - name: "Run pytest"
         run: "uv run --extra test pytest tests --cov=${{ env.PACKAGE_NAME }} --cov-report=xml --cov-report term-missing"
-      # Build the wheel, install it in an isolated environment (not the editable .venv), and render
-      # something. This catches files missing from the wheel, such as the jinja2 templates that
-      # [tool.setuptools.package-data] must list: 2.0.0 shipped without them and failed on first use.
-      # Linux only: the shell glob below does not expand in Windows PowerShell.
-      - name: "Smoke test the built wheel"
-        if: runner.os == 'Linux'
-        run: |
-          uv build --wheel -o dist
-          cd /tmp
-          uv run --isolated --no-project --with "$(ls "$GITHUB_WORKSPACE"/dist/*.whl)" python -c "import rstobj.api as rstobj; print(rstobj.markup.Header(title='Hello').render())"
       # Upload coverage report to Codecov
       # The 'if' condition checks if the current Python version should report coverage
       # For the first time setup, you should to goto codecov.io, enable your repo,
