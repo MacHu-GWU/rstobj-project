@@ -1,33 +1,25 @@
 # -*- coding: utf-8 -*-
 
-from rstobj.tests import compare_with
-from rstobj.directives.image import Image
+import pytest
+
+from rstobj.tests.cases import cases_for
+from rstobj.tests.cases import case_id
+from rstobj.tests.cases import find_orphan_snapshots
+
+MODULE = "rstobj.directives.image"
 
 
-class TestImage:
-    def test(self):
-        image = Image(
-            uri="https://www.python.org/static/img/python-logo.png",
-            width=320,
-            height=320,
-            alt_text="Image Not Found",
-            align=Image.AlignOptions.center,
-        )
-        rst = image.render()
-        compare_with(rst, "rstobj.directives.image.Image.with-everything.rst")
+@pytest.mark.parametrize("case", cases_for(MODULE), ids=case_id)
+def test_case(case):
+    """
+    The output equals its snapshot byte for byte, and docutils parses it
+    without a warning.
+    """
+    case.check()
 
-        image = Image(
-            uri="https://www.python.org/static/img/python-logo.png",
-        )
-        rst = image.render()
-        compare_with(rst, "rstobj.directives.image.Image.uri-only.rst")
 
-    def test_render_indent(self):
-        image = Image(
-            uri="https://www.python.org/static/img/python-logo.png",
-        )
-        rst = image.render(indent=1)
-        compare_with(rst, "rstobj.directives.image.Image.render-indent.rst")
+def test_no_orphan_snapshots():
+    assert find_orphan_snapshots(MODULE) == []
 
 
 if __name__ == "__main__":

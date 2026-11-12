@@ -1,3 +1,3 @@
 {%- for item in obj.items %}
-- {{ item }}
+- {{ obj._render_nested(item, 2) }}
 {%- endfor %}

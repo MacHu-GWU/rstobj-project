@@ -3,6 +3,8 @@ version: 2
 
 sphinx:
   configuration: docs/source/conf.py
+  # Same as ``mise run build-doc`` (-W): any warning fails the build.
+  fail_on_warning: true
 
 build:
   os: ubuntu-24.04

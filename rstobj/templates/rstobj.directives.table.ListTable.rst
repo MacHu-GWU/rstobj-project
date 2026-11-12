@@ -1,28 +1,29 @@
 {% extends "rstobj.directives.base.Directive.rst" %}
 {% block other %}
+{%- set width = tab|length + 4 %}
 {%- if obj.header %}
-    :header-rows: 1
+{{ tab }}:header-rows: 1
 {%- else %}
-    :header-rows: 0
+{{ tab }}:header-rows: 0
 {%- endif %}
 {%- if obj.index %}
-    :stub-columns: 1
+{{ tab }}:stub-columns: 1
 {%- else %}
-    :stub-columns: 0
+{{ tab }}:stub-columns: 0
 {%- endif %}
-{%- if obj.widths is not none %}
-    :widths: {{ obj.widths_arg }}
+{%- if obj.widths %}
+{{ tab }}:widths: {{ obj.widths_arg }}
 {%- endif %}
 {%- if obj.align is not none %}
-    :align: {{ obj.align }}
+{{ tab }}:align: {{ obj.align }}
 {%- endif %}
 {% for row in obj.data %}
-    {%- for item in row %}
-    {%- if loop.index0 == 0 %}
-    * - {{ obj.str_or_render(item, indent=2, first_line_indent=0) }}
-    {%- else %}
-      - {{ obj.str_or_render(item, indent=2, first_line_indent=0) }}
-    {%- endif %}
-    {%- endfor %}
+{%- for item in row %}
+{%- if loop.index0 == 0 %}
+{{ tab }}* - {{ obj._render_nested(item, width) }}
+{%- else %}
+{{ tab }}  - {{ obj._render_nested(item, width) }}
+{%- endif %}
+{%- endfor %}
 {%- endfor %}
 {% endblock %}

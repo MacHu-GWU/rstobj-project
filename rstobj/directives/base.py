@@ -14,6 +14,8 @@ class Directive(RstObj):
     name: str | None = field(default=None)
 
     meta_directive_keyword: T.ClassVar[str | None] = None
+    #: False for a directive that has no ``:name:`` option, such as ``contents``.
+    meta_supports_name: T.ClassVar[bool] = True
 
     @property
     def arg(self):  # pragma: no cover

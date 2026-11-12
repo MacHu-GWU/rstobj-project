@@ -4,6 +4,38 @@ Release and Version History
 ==============================================================================
 
 
+2.0.1 (2026-11-11)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+**Breaking Changes**
+
+- Drop Python 3.10, which reached end of life in October 2026; this release requires Python 3.11+. Users on Python 3.10 keep getting 2.0.0.
+
+**Bugfixes**
+
+These fixes only change output that was invalid reStructuredText or plainly wrong; every output that was valid before is unchanged, apart from trailing whitespace.
+
+- ``Include``: render the options with their real hyphenated names (``:start-line:``, ``:end-line:``, ``:start-after:``, ``:end-before:``, ``:number-lines:``, ``:tab-width:``). The underscore names made docutils reject the directive.
+- ``Include(literal=False)`` no longer renders ``:literal:``.
+- ``BulletList`` and ``EnumList``: render an item that is an rstobj object, such as a nested list or a code block, instead of its Python repr.
+- ``BulletList``, ``EnumList`` and ``ListTable``: indent the continuation lines of multi-line string items and cells, so they stay inside their item or cell. Strings whose continuation lines are already indented are left unchanged.
+- ``Header``: count wide characters (CJK, emoji) as two columns when sizing the underline, so a non-ASCII title no longer gets an underline that is too short.
+- ``Header``: an empty ``ref_label`` (for example from ``auto_label`` on a title made only of punctuation) no longer renders the invalid target ``.. _:``.
+- ``CodeBlock`` and its language subclasses: render ``class_`` and ``name`` as ``:class:`` and ``:name:``; they were silently dropped.
+- ``Image``: render ``scale`` as ``:scale: <n>%``; it was silently dropped.
+- ``TableOfContent``: no longer render ``:name:``, which the ``contents`` directive does not accept.
+- ``ListTable(widths=[])`` no longer renders an empty ``:widths:`` option.
+- Changing ``rstobj.option.Options.tab`` now changes every indent, including directive options, so a table with a code block in a cell stays valid.
+- No trailing whitespace: blank lines in indented output stay empty, and a directive with no argument renders ``.. code-block::`` with no space after it.
+
+**Miscellaneous**
+
+- New docs page, "Rendering Gallery": every example shows its Python code, the exact reStructuredText it produces, and how Sphinx renders it.
+- Rewrite the tests around one list of cases (``rstobj/tests/cases.py``) shared with the gallery. Each case's output is compared byte for byte with a snapshot file, and checked to parse in docutils without a warning.
+- The docs build now fails on any warning, locally and on Read the Docs.
+- Fix the README example, which used imports removed in 2.0.0.
+- Move to the new project template: ``uv``, ``mise`` tasks, ruff, and an updated CI.
+
+
 2.0.0 (2026-04-05)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 **Breaking Changes**

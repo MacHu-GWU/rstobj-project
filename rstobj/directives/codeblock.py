@@ -22,6 +22,9 @@ class Code(RstObj):
 @dataclass(kw_only=True)
 class CodeBlockEmpty(Directive):
     """
+    A literal block (``::``). It has no options, so ``class_`` and ``name``
+    are not rendered.
+
     Example::
 
         code = "your code ..."
@@ -92,7 +95,7 @@ Example::
 
 Output::
 
-    .. code-block: {}
+    .. code-block:: {}
 
         your code ...
 """.strip()

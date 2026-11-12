@@ -1,50 +1,25 @@
 # -*- coding: utf-8 -*-
 
-from rstobj.tests import compare_with
-from rstobj.directives.codeblock import Code
-from rstobj.directives.codeblock import CodeBlockEmpty
-from rstobj.directives.codeblock import CodeBlock
-from rstobj.directives.codeblock import CodeBlockPython
+import pytest
 
-cb_user_class = """
-class User(object):
-    def __init__(self, id, name):
-        self.id = id
-        self.name = name
-""".strip()
+from rstobj.tests.cases import cases_for
+from rstobj.tests.cases import case_id
+from rstobj.tests.cases import find_orphan_snapshots
+
+MODULE = "rstobj.directives.codeblock"
 
 
-class TestCode:
-    def test_render_indent(self):
-        code = Code(text=cb_user_class)
-        rst = code.render(indent=1)
-        compare_with(rst, "rstobj.directives.codeblock.Code.render-indent.rst")
+@pytest.mark.parametrize("case", cases_for(MODULE), ids=case_id)
+def test_case(case):
+    """
+    The output equals its snapshot byte for byte, and docutils parses it
+    without a warning.
+    """
+    case.check()
 
 
-class TestCodeBlockEmpty:
-    def test_render(self):
-        cb = CodeBlockEmpty(code=Code(text=cb_user_class))
-        rst = cb.render()
-        compare_with(rst, "rstobj.directives.codeblock.CodeBlockEmpty.render.rst")
-
-        rst = cb.render(indent=1)
-        compare_with(
-            rst, "rstobj.directives.codeblock.CodeBlockEmpty.render-indent.rst"
-        )
-
-
-class TestCodeBlock:
-    def test_render(self):
-        cb = CodeBlock(code=Code(text=cb_user_class))
-        rst = cb.render()
-        compare_with(rst, "rstobj.directives.codeblock.CodeBlock.render.rst")
-
-
-class TestCodeBlockPython:
-    def test_render(self):
-        cb = CodeBlockPython.from_string(cb_user_class)
-        rst = cb.render()
-        compare_with(rst, "rstobj.directives.codeblock.CodeBlockPython.render.rst")
+def test_no_orphan_snapshots():
+    assert find_orphan_snapshots(MODULE) == []
 
 
 if __name__ == "__main__":

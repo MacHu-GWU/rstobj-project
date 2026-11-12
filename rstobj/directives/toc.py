@@ -23,6 +23,9 @@ class TableOfContent(Directive):
     :param depth: int, optional.
     :param local: bool, optional.
 
+    The ``contents`` directive has no ``:name:`` option, so ``name`` is
+    not rendered.
+
     :type backlinks: str
     :param backlinks: optional. one of
         :attr:`TableOfContent.BacklinksOptions`.
@@ -44,6 +47,7 @@ class TableOfContent(Directive):
     backlinks: str | None = field(default=None)
 
     meta_directive_keyword: T.ClassVar[str] = "contents"
+    meta_supports_name: T.ClassVar[bool] = False
 
     class BacklinksOptions:
         """

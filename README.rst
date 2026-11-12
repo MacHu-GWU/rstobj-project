@@ -71,23 +71,21 @@ I have a `Blog Post <https://github.com/MacHu-GWU/Tech-Blog/issues/6>`_ to share
 
 .. code-block:: python
 
-    import rstobj # or from rstobj import *
+    import rstobj.api as rstobj
 
     header = rstobj.markup.Header(title="Section1", header_level=1, auto_label=True)
-    rst_header = header.render()
-    print(rst_header)
+    print(header.render())
 
     ltable = rstobj.directives.ListTable(
         data=[["id", "name"], [1, "Alice"], [2, "Bob"]],
         title="Users",
         header=True,
     )
-    rst = ltable.render()
-    print(rst_ltable)
+    print(ltable.render())
 
 Output::
 
-    .. _section1:
+    .. _Section1:
 
     Section1
     ========
@@ -103,7 +101,9 @@ Output::
         * - 2
           - Bob
 
-I recommend to use this in your jinja2 template, content of ``outut.rst``::
+See the `Rendering Gallery <https://rstobj.readthedocs.io/en/latest/01-Rendering-Gallery/index.html>`_ for every supported markup and directive, with its Python code, its output, and how it renders.
+
+I recommend to use this in your jinja2 template, content of ``output.rst``::
 
     {{ header.render() }}
     {{ ltable.render() }}

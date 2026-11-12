@@ -7,6 +7,12 @@ Table of Content
 .. autotoctree::
     :maxdepth: 1
 
+.. toctree::
+    :hidden:
+
+    release-history
+    api/rstobj/__init__
+
 .. include:: ../../AUTHORS.rst
 
 

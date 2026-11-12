@@ -1,4 +1,4 @@
-{%- if obj.ref_label is not none %}
+{%- if obj.ref_label %}
 .. _{{ obj.ref_label }}:
 {% endif %}
 {{ obj.title }}

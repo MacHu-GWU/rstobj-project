@@ -16,6 +16,7 @@ Default `section header line <http://docutils.sourceforge.net/docs/user/rst/quic
 
 from __future__ import annotations
 
+import unicodedata
 from dataclasses import dataclass
 from dataclasses import field
 from ..base import RstObj
@@ -37,6 +38,23 @@ def to_label(title: str) -> str:
     return "-".join([
         chunk.strip() for chunk in title.split("-") if chunk.strip()
     ])
+
+
+def _display_width(text: str) -> int:
+    """
+    The number of columns ``text`` takes on screen, as docutils counts them
+    to check a section underline: wide East Asian characters and emoji count
+    as two columns, combining characters as zero.
+    """
+    width = 0
+    for char in text:
+        if unicodedata.combining(char):
+            continue
+        if unicodedata.east_asian_width(char) in ("W", "F"):
+            width += 2
+        else:
+            width += 1
+    return width
 
 
 HEADER_CHAR_MAPPER = {
@@ -92,7 +110,7 @@ class Header(RstObj):
         if self.auto_label and (self.ref_label is None):
             self.ref_label = to_label(self.title)
 
-        title_length = len(self.title)
+        title_length = _display_width(self.title)
         if self.bar_length is None:
             self.bar_length = title_length
         elif self.bar_length < title_length:
@@ -112,12 +130,14 @@ class HeaderLevel(Header):
     pass
 
 
+# Starts with a newline: autodoc dedents every line after the first, so the
+# literal block must be indented relative to "Example::" on a later line.
 header_doc_string = """
-Example::
+    Example::
 
-    Header{level}
-    {bar}
-""".strip()
+        Header{level}
+        {bar}
+"""
 
 
 def _build_doc_string(header_level: int) -> str:

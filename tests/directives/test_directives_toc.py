@@ -1,24 +1,25 @@
 # -*- coding: utf-8 -*-
 
-from rstobj.tests import compare_with
-from rstobj.directives.toc import TableOfContent
+import pytest
+
+from rstobj.tests.cases import cases_for
+from rstobj.tests.cases import case_id
+from rstobj.tests.cases import find_orphan_snapshots
+
+MODULE = "rstobj.directives.toc"
 
 
-class TestTableOfContent:
-    def test(self):
-        toc = TableOfContent()
-        rst = toc.render()
-        compare_with(rst, "rstobj.directives.toc.TableOfContent.basic.rst")
+@pytest.mark.parametrize("case", cases_for(MODULE), ids=case_id)
+def test_case(case):
+    """
+    The output equals its snapshot byte for byte, and docutils parses it
+    without a warning.
+    """
+    case.check()
 
-        toc = TableOfContent(
-            title="Table of Content",
-            depth=1,
-            backlinks=TableOfContent.BacklinksOptions.top,
-            local=True,
-        )
-        rst = toc.render()
-        compare_with(
-            rst, "rstobj.directives.toc.TableOfContent.rich-options.rst")
+
+def test_no_orphan_snapshots():
+    assert find_orphan_snapshots(MODULE) == []
 
 
 if __name__ == "__main__":

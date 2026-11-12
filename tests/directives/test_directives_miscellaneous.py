@@ -1,16 +1,25 @@
 # -*- coding: utf-8 -*-
 
-from rstobj.tests import compare_with
-from rstobj.directives.miscellaneous import Include
+import pytest
+
+from rstobj.tests.cases import cases_for
+from rstobj.tests.cases import case_id
+from rstobj.tests.cases import find_orphan_snapshots
+
+MODULE = "rstobj.directives.miscellaneous"
 
 
-class TestInclude:
-    def test(self):
-        include = Include(
-            path="README.rst",
-        )
-        rst = include.render()
-        compare_with(rst, "rstobj.directives.miscellaneous.Include.render.rst")
+@pytest.mark.parametrize("case", cases_for(MODULE), ids=case_id)
+def test_case(case):
+    """
+    The output equals its snapshot byte for byte, and docutils parses it
+    without a warning.
+    """
+    case.check()
+
+
+def test_no_orphan_snapshots():
+    assert find_orphan_snapshots(MODULE) == []
 
 
 if __name__ == "__main__":

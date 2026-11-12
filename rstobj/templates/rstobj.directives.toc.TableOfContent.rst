@@ -1,12 +1,12 @@
 {% extends "rstobj.directives.base.Directive.rst" %}
 {% block other %}
 {%- if obj.depth is not none %}
-    :depth: {{ obj.depth }}
+{{ tab }}:depth: {{ obj.depth }}
 {%- endif %}
 {%- if obj.local %}
-    :local:
+{{ tab }}:local:
 {%- endif %}
 {%- if obj.backlinks is not none %}
-    :backlinks: {{ obj.backlinks }}
+{{ tab }}:backlinks: {{ obj.backlinks }}
 {%- endif %}
 {% endblock %}

@@ -229,9 +229,11 @@ with open(custom_style_file_path, "rb") as f:
 rst_prolog = "\n" + custom_style_file_content + "\n"
 
 # Add data for Jinja2
+# Only a missing module falls back to no data; any other error in the data
+# code must fail the build instead of silently emptying the pages that use it.
 try:
     from rstobj.docs import doc_data
-except:
+except ImportError:
     doc_data = dict()
 
 jinja_contexts = {

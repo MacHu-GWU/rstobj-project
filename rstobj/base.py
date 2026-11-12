@@ -16,6 +16,40 @@ from .templates import env
 from .option import Options
 
 
+def _indent_line(line: str, prefix: str) -> str:
+    """
+    Prefix a line and strip its trailing whitespace. A blank line stays empty,
+    so indenting never leaves whitespace-only lines.
+    """
+    line = line.rstrip()
+    if line:
+        return prefix + line
+    else:
+        return ""
+
+
+def _indent_continuation(text: str, width: int, force: bool) -> str:
+    """
+    Indent every line after the first by ``width`` spaces, so a multi-line
+    text stays inside the list item or table cell it starts in.
+
+    :param force: if False, text whose continuation lines are all indented by
+        at least ``width`` already is returned unchanged, so callers that
+        indented their strings by hand keep the same output.
+    """
+    lines = text.split("\n")
+    rest = lines[1:]
+    if not force:
+        is_indented = all(
+            (not line.strip()) or (len(line) - len(line.lstrip(" ")) >= width)
+            for line in rest
+        )
+        if is_indented:
+            return text
+    prefix = " " * width
+    return "\n".join([lines[0]] + [_indent_line(line, prefix) for line in rest])
+
+
 @dataclass(kw_only=True)
 class RstObj:
     """
@@ -53,18 +87,17 @@ class RstObj:
 
         :param kwargs: other optional arguments.
         """
-        out = self.template.render(obj=self)
-        if indent:
+        out = self.template.render(obj=self, tab=Options.tab)
+        if indent or first_line_indent:
             origin_lines = out.split("\n")
             target_lines = [
-                (Options.tab * indent) + line.rstrip()
-                for line in origin_lines
+                _indent_line(line, Options.tab * (indent or 0)) for line in origin_lines
             ]
             if first_line_indent is not None:
                 if first_line_indent >= 0:
-                    target_lines[0] = (
-                        Options.tab * first_line_indent
-                        + origin_lines[0].rstrip()
+                    target_lines[0] = _indent_line(
+                        origin_lines[0],
+                        Options.tab * first_line_indent,
                     )
                 else:  # pragma: no cover
                     raise TypeError
@@ -84,3 +117,23 @@ class RstObj:
             return value.render(**kwargs)
         else:
             return str(value)
+
+    @staticmethod
+    def _render_nested(
+        value: str | RstObj,
+        width: int,
+    ) -> str:
+        """
+        Render a list item or table cell whose text starts after a marker
+        ``width`` characters wide, such as ``"- "`` or ``"    * - "``.
+
+        A :class:`RstObj` is rendered without its leading and trailing blank
+        lines, and all its continuation lines are indented. A string is taken
+        as reStructuredText; its continuation lines are indented unless they
+        already are.
+        """
+        if isinstance(value, RstObj):
+            text = value.render().strip("\n")
+            return _indent_continuation(text, width, force=True)
+        else:
+            return _indent_continuation(str(value), width, force=False)

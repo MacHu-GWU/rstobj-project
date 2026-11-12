@@ -22,9 +22,12 @@ class Image(Directive):
     :param uri: required.
     :param height: optional.
     :param width: optional.
-    :param scale: optional.
+    :param scale: optional, a percentage, rendered as ``:scale: 50%``.
     :param alt_text: optional.
     :param align: optional. one of :class:`Image.AlignOptions`.
+        ``"top"``, ``"middle"`` and ``"bottom"`` are only valid for an image
+        inside a substitution definition; a standalone image accepts
+        ``"left"``, ``"center"`` and ``"right"``.
 
     Example::
 

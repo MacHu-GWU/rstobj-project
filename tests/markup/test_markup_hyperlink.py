@@ -1,21 +1,25 @@
 # -*- coding: utf-8 -*-
 
-from rstobj.markup.hyperlink import URI
-from rstobj.markup.hyperlink import Reference
+import pytest
+
+from rstobj.tests.cases import cases_for
+from rstobj.tests.cases import case_id
+from rstobj.tests.cases import find_orphan_snapshots
+
+MODULE = "rstobj.markup.hyperlink"
 
 
-class TestURI:
-    def test(self):
-        obj = URI(title="Python Homepage", link="https://www.python.org")
-        rst = obj.render()
-        assert rst == "`Python Homepage <https://www.python.org>`_"
+@pytest.mark.parametrize("case", cases_for(MODULE), ids=case_id)
+def test_case(case):
+    """
+    The output equals its snapshot byte for byte, and docutils parses it
+    without a warning.
+    """
+    case.check()
 
 
-class TestReference:
-    def test(self):
-        obj = Reference(title="Section1", label="section1")
-        rst = obj.render()
-        assert rst == ":ref:`Section1 <section1>`"
+def test_no_orphan_snapshots():
+    assert find_orphan_snapshots(MODULE) == []
 
 
 if __name__ == "__main__":
