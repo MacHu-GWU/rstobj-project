@@ -5,10 +5,8 @@ omit =
     rstobj/docs/*
     rstobj/tests/*
     rstobj/vendor/*
-    rstobj/_version.py
     rstobj/cli.py
     rstobj/paths.py
-    rstobj/demo.py
 
 [report]
 # Regexes for lines to exclude from consideration

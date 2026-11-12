@@ -1,4 +1,4 @@
-.. _release-history:
+.. _release_history:
 
 Release and Version History
 ==============================================================================

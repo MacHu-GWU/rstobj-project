@@ -16,8 +16,8 @@ Default `section header line <http://docutils.sourceforge.net/docs/user/rst/quic
 
 from __future__ import annotations
 
-import typing as T
-from dataclasses import dataclass, field
+from dataclasses import dataclass
+from dataclasses import field
 from ..base import RstObj
 
 dash_char_list = " _~"
