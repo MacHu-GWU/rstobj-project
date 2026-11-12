@@ -12,7 +12,9 @@ Release and Version History
 
 **Bugfixes**
 
-These fixes only change output that was invalid reStructuredText or plainly wrong; every output that was valid before is unchanged, apart from trailing whitespace.
+- Ship the jinja2 templates (``rstobj/templates/*.rst``) in the wheel. The 2.0.0 wheel left them out, so any ``render()`` call raised ``jinja2.exceptions.TemplateNotFound`` after ``pip install rstobj``.
+
+The fixes below only change output that was invalid reStructuredText or plainly wrong; every output that was valid before is unchanged, apart from trailing whitespace.
 
 - ``Include``: render the options with their real hyphenated names (``:start-line:``, ``:end-line:``, ``:start-after:``, ``:end-before:``, ``:number-lines:``, ``:tab-width:``). The underscore names made docutils reject the directive.
 - ``Include(literal=False)`` no longer renders ``:literal:``.
@@ -33,6 +35,8 @@ These fixes only change output that was invalid reStructuredText or plainly wron
 - Rewrite the tests around one list of cases (``rstobj/tests/cases.py``) shared with the gallery. Each case's output is compared byte for byte with a snapshot file, and checked to parse in docutils without a warning.
 - The docs build now fails on any warning, locally and on Read the Docs.
 - Fix the README example, which used imports removed in 2.0.0.
+- CI builds the wheel, installs it in an isolated environment, and renders a header, so a wheel with missing files fails CI.
+- Upgrade the locked ``anyio`` (a dev dependency through ``httpx2``) to 4.16.0, which removes a pytest 10 deprecation warning from the test run.
 - Move to the new project template: ``uv``, ``mise`` tasks, ruff, and an updated CI.
 
 
